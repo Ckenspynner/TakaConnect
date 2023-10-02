@@ -365,12 +365,12 @@ class _FilterScreenState extends State<FilterScreen> {
                             context,
                             SellerScreen.routeName,
                             arguments: {
-                              'barTitle': selectedValue1 == 'All Categories'
-                                  ? 'Product List'
-                                  : '$selectedValue1 Sellers'
+                              'barTitle': selectedValue1 == 'All Categories'? 'Product List': '$selectedValue1 Sellers',
+                              'filterType': selectedValue2,
+                              'filterCounty': selectedValue3,
                             },
                           );
-                          //Navigator.pop(context);
+                          Navigator.pop(context);
                         }
                       },
                     ),

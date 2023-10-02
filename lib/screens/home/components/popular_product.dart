@@ -25,6 +25,7 @@ class PopularProducts extends StatelessWidget {
               ...List.generate(
                 demoCategories.length,
                 (index) {
+
                   if (demoCategories[index].isPopular) {
                     return ProductCard(product: demoCategories[index]);
                   }

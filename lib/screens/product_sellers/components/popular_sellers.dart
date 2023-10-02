@@ -32,11 +32,12 @@ class PopularSeller extends StatelessWidget {
               ...List.generate(
                 demoProducts.length,
                     (index) {
-                  if (demoProducts[index].isPopular) {
+                      print('${demoProducts[index].title},${demoProducts[index].materialType},${demoProducts[index].subcounty}');
+                  //if (demoProducts[index].isPopular) {
                     return SellerCard(product: demoProducts[index]);
-                  }
+                  //}
 
-                  return const SizedBox.shrink(); // here by default width and height is 0
+                  //return const SizedBox.shrink(); // here by default width and height is 0
                 },
               ),
               //SizedBox(width: getProportionateScreenWidth(20)),
