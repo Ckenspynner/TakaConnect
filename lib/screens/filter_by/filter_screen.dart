@@ -14,16 +14,16 @@ class FilterScreen extends StatefulWidget {
 class _FilterScreenState extends State<FilterScreen> {
 
 
-  String selectedValue1 = "Select Type of Product";
-  String selectedValue2 = "Select Type of Material";
-  String selectedValue3 = "Select Type of Layer";
+  String selectedValue1 = "Select Category";
+  String selectedValue2 = "Select Category Type";
+  String selectedValue3 = "Select Sub-County";
 
   //Dropdown parameters definition
   List<DropdownMenuItem<String>> get dropdownItems1 {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
-          value: "Select Type of Product",
-          child: Text("Select Type of Product")),
+          value: "Select Category",
+          child: Text("Select Category")),
       const DropdownMenuItem(value: "FP", child: Text("Food Product (FP)")),
       const DropdownMenuItem(
           value: "HP", child: Text("Household Product (HP)")),
@@ -38,17 +38,14 @@ class _FilterScreenState extends State<FilterScreen> {
   List<DropdownMenuItem<String>> get dropdownItems2 {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
-          value: "Select Type of Material",
-          child: Text("Select Type of Material")),
+          value: "Select Category Type",
+          child: Text("Select Category Type")),
+      const DropdownMenuItem(value: "FP", child: Text("Food Product (FP)")),
       const DropdownMenuItem(
-          value: "HDPE", child: Text("High Density Polyethylene (HDPE)")),
-      const DropdownMenuItem(
-          value: "LDPE", child: Text("Low Density Polyethylene (LDPE)")),
-      const DropdownMenuItem(value: "O", child: Text("Others (O)")),
-      const DropdownMenuItem(
-          value: "PET", child: Text("Polyethylene Terephthalate (PET)")),
-      const DropdownMenuItem(value: "PP", child: Text("Polyethylene (PP)")),
-      const DropdownMenuItem(value: "PVC", child: Text("Polyvinylchloride (PVC)")),
+          value: "HP", child: Text("Household Product (HP)")),
+      const DropdownMenuItem(value: "0", child: Text("Others (O)")),
+      const DropdownMenuItem(value: "PC", child: Text("Personal Care (PC)")),
+      const DropdownMenuItem(value: "SM", child: Text("Smoking Material (SM)")),
     ];
     return menuItems;
   }
@@ -57,7 +54,7 @@ class _FilterScreenState extends State<FilterScreen> {
   List<DropdownMenuItem<String>> get dropdownItems3 {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
-          value: "Select Type of Layer", child: Text("Select Type of Layer")),
+          value: "Select Sub-County", child: Text("Select Sub-County")),
       const DropdownMenuItem(value: "SL", child: Text("Single Layer (SL)")),
       const DropdownMenuItem(value: "ML", child: Text("Multi Layer (ML)")),
     ];
@@ -76,20 +73,20 @@ class _FilterScreenState extends State<FilterScreen> {
             Navigator.pop(context);
           },
           child: Container(
-            child: Icon(
+            child: const Icon(
               Icons.close,
               color: Colors.black,
             ),
           ),
         ),
-        title: Text("Filters",
+        title: const Text("Filters",
         ),
       ),
       body: Container(
         width: double.maxFinite,
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
         decoration: BoxDecoration(
-          color: Color(0xFFF2F3F2),
+          color: const Color(0xFFF2F3F2),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Column(
@@ -115,8 +112,8 @@ class _FilterScreenState extends State<FilterScreen> {
                   fillColor: Colors.transparent,
                 ),
                 validator: (value) =>
-                value == "Select Type of Product"
-                    ? "Select Type of Product"
+                value == "Select Category"
+                    ? "Select Category"
                     : null,
                 //dropdownColor: Colors.blueAccent,
                 value: selectedValue1,
@@ -146,52 +143,21 @@ class _FilterScreenState extends State<FilterScreen> {
                   fillColor: Colors.transparent,
                 ),
                 validator: (value) =>
-                value == "Select Type of Product"
-                    ? "Select Type of Product"
+                value == "Select Category Type"
+                    ? "Select Category Type"
                     : null,
                 //dropdownColor: Colors.blueAccent,
-                value: selectedValue1,
+                value: selectedValue2,
                 icon: const Icon(Icons.keyboard_arrow_down),
                 onChanged: (String? newValue) {
                   setState(() {
-                    selectedValue1 = newValue!;
+                    selectedValue2 = newValue!;
                   });
                 },
-                items: dropdownItems1),
+                items: dropdownItems2),
             const SizedBox(
               height: 30,
             ),
-            // DropdownButtonFormField(
-            //     decoration: InputDecoration(
-            //       enabledBorder: OutlineInputBorder(
-            //         borderSide: const BorderSide(
-            //             color: Colors.greenAccent, width: 2),
-            //         borderRadius: BorderRadius.circular(20),
-            //       ),
-            //       border: OutlineInputBorder(
-            //         borderSide: const BorderSide(
-            //             color: Colors.greenAccent, width: 2),
-            //         borderRadius: BorderRadius.circular(20),
-            //       ),
-            //       filled: true,
-            //       fillColor: Colors.transparent,
-            //     ),
-            //     validator: (value) =>
-            //     value == "Select Type of Material"
-            //         ? "Select Type of Material"
-            //         : null,
-            //     //dropdownColor: Colors.blueAccent,
-            //     value: selectedValue2,
-            //     icon: const Icon(Icons.keyboard_arrow_down),
-            //     onChanged: (String? newValue) {
-            //       setState(() {
-            //         selectedValue2 = newValue!;
-            //       });
-            //     },
-            //     items: dropdownItems2),
-            // const SizedBox(
-            //   height: 30,
-            // ),
             DropdownButtonFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -208,8 +174,8 @@ class _FilterScreenState extends State<FilterScreen> {
                   fillColor: Colors.transparent,
                 ),
                 validator: (value) =>
-                value == "Select Type of Layer"
-                    ? "Select Type of Layer"
+                value == "Select Sub-County"
+                    ? "Select Sub-County"
                     : null,
                 //dropdownColor: Colors.blueAccent,
                 value: selectedValue3,
@@ -223,25 +189,6 @@ class _FilterScreenState extends State<FilterScreen> {
             const SizedBox(
               height: 30,
             ),
-            // getLabel("Categories"),
-            // SizedBox(height: 15),
-            // OptionItem(text: "Eggs"),
-            // SizedBox(height: 15),
-            // OptionItem(text: "Noodles & Pasta"),
-            // SizedBox(height: 15),
-            // const OptionItem(text: "Chips & Crisps"),
-            // const SizedBox(height: 15),
-            // OptionItem(text: "Fast Food"),
-            // SizedBox(height: 30),
-            // getLabel("Brand"),
-            // SizedBox(height: 15),
-            // OptionItem(text: "Individual Collection"),
-            // SizedBox(height: 15),
-            // OptionItem(text: "Cocacola"),
-            // SizedBox(height: 15),
-            // OptionItem(text: "Ifad"),
-            // SizedBox(height: 15),
-            // OptionItem(text: "Kazi Formas"),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
