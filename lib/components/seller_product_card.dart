@@ -5,8 +5,8 @@ import '../screens/details/details_screen.dart';
 import '../utils/constants.dart';
 import '../utils/size_config.dart';
 
-class SellerCard extends StatelessWidget {
-  const SellerCard({
+class SellerProductCard extends StatelessWidget {
+  const SellerProductCard({
     Key? key,
     this.width = 140,
     this.aspectRetio = 1.02,
@@ -21,11 +21,7 @@ class SellerCard extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: GestureDetector(
-        onTap: () => Navigator.pushNamed(
-          context,
-          DetailsScreen.routeName,
-          arguments: ProductDetailsArguments(product: product),
-        ),
+        onTap: () {},
         child: Padding(
           padding: EdgeInsets.only(left: getProportionateScreenWidth(20),right: getProportionateScreenWidth(20)),
           child: Column(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:takaconnect/screens/home/components/icon_btn_with_counter.dart';
+import 'package:takaconnect/screens/product_sellers/sellers.dart';
 import '../../../utils/size_config.dart';
 import 'section_title.dart';
 
@@ -25,15 +27,17 @@ class SpecialOffers extends StatelessWidget {
           child: Row(
             children: [
               SpecialOfferCard(
-                image: "assets/images/Image Banner 2.png",
+                image: "assets/images/Image Banner 4.png",
+                //image: "assets/images/seeproducts.png",
                 category: "See Your Products",
                 numOfBrands: 18,
                 press: () {
-                  print('object');
+                  Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': 'Your Products'}, );
                 },
               ),
               SpecialOfferCard(
-                image: "assets/images/Image Banner 3.png",
+                image: "assets/images/Image Banner 5.png",
+                //image: "assets/images/Image Banner 3.png",
                 category: "Add Products",
                 //numOfBrands: 24,
                 press: () {
@@ -118,12 +122,12 @@ class SpecialOfferCard extends StatelessWidget {
                 Positioned.fill(
                   child: Align(
                     alignment: Alignment.bottomRight,
-                    child: numOfBrands != null? null: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.add,
-                        size: 30,
-                        color: Colors.white,
+                    child: numOfBrands != null? null: Container(
+                      color: Colors.greenAccent,
+                      child: IconBtnWithCounter(
+                        svgSrc: "assets/icons/add.svg",
+                        //numOfitem: 3,
+                        press: () {},
                       ),
                     ),
                   ),

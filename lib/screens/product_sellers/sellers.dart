@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:takaconnect/components/seller_card.dart';
+import 'package:takaconnect/components/seller_product_card.dart';
 import 'package:takaconnect/models/Product.dart';
 import 'package:takaconnect/screens/filter_by/filter_screen.dart';
 import 'package:takaconnect/utils/size_config.dart';
@@ -40,13 +41,13 @@ class SellerScreen extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, FilterScreen.routeName);
             },
-            child: Container(
+            child: arguments['barTitle'] != 'Your Products'?Container(
               padding: const EdgeInsets.only(right: 25),
               child: const Icon(
                 Icons.sort,
                 color: Colors.black,
               ),
-            ),
+            ):Container(),
           ),
         ],
         title: Container(
@@ -96,6 +97,13 @@ class SellerScreen extends StatelessWidget {
 
                         return demoProducts[index].title != arguments['filterTitle'] && demoProducts[index].materialType != arguments['filterType'] ?const SizedBox.shrink(): SellerCard(product: demoProducts[index]);
 
+                      }
+
+                      //CASE : Your Products ,null ,null
+                      if (arguments['barTitle'] == 'Your Products' &&
+                          arguments['filterType'] != 'All Categories Types' &&
+                          arguments['filterCounty'] != 'All Sub-County') {
+                        return SellerProductCard(product: demoProducts[index]);
                       }
 
                       //CASE : Rubber Sellers ,Tyre ,Kisauni
