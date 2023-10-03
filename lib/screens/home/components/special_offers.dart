@@ -15,7 +15,7 @@ class SpecialOffers extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SectionTitle(
-            title: "Special for you",
+            title: "Product Management",
             press: () {},
           ),
         ),
@@ -26,15 +26,19 @@ class SpecialOffers extends StatelessWidget {
             children: [
               SpecialOfferCard(
                 image: "assets/images/Image Banner 2.png",
-                category: "Smartphone",
+                category: "See Your Products",
                 numOfBrands: 18,
-                press: () {},
+                press: () {
+                  print('object');
+                },
               ),
               SpecialOfferCard(
                 image: "assets/images/Image Banner 3.png",
-                category: "Fashion",
-                numOfBrands: 24,
-                press: () {},
+                category: "Add Products",
+                //numOfBrands: 24,
+                press: () {
+                  print('object');
+                },
               ),
               SizedBox(width: getProportionateScreenWidth(20)),
             ],
@@ -50,12 +54,12 @@ class SpecialOfferCard extends StatelessWidget {
     Key? key,
     required this.category,
     required this.image,
-    required this.numOfBrands,
+    this.numOfBrands,
     required this.press,
   }) : super(key: key);
 
   final String category, image;
-  final int numOfBrands;
+  final int? numOfBrands;
   final GestureTapCallback press;
 
   @override
@@ -94,7 +98,7 @@ class SpecialOfferCard extends StatelessWidget {
                   ),
                   child: Text.rich(
                     TextSpan(
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       children: [
                         TextSpan(
                           text: "$category\n",
@@ -103,8 +107,24 @@ class SpecialOfferCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(text: "$numOfBrands Brands")
+                        TextSpan(
+                            text: numOfBrands == null
+                                ? ''
+                                : "$numOfBrands Products"),
                       ],
+                    ),
+                  ),
+                ),
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: numOfBrands != null? null: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.add,
+                        size: 30,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

@@ -108,15 +108,22 @@ class _ProductDescriptionState extends State<ProductDescription> {
               ),
               Visibility(
                 visible: _show_details,
-                child: const Padding(
-                  padding: EdgeInsets.only(
-                    top: 10,
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                          'This section will hold the sellers basic information...'),
-                    ],
+                maintainAnimation: true,
+                maintainState: true,
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.fastOutSlowIn,
+                  opacity: _show_details ? 1 : 0,
+                  child: const Padding(
+                    padding: EdgeInsets.only(
+                      top: 10,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                            'This section will hold the sellers basic information...'),
+                      ],
+                    ),
                   ),
                 ),
               ),

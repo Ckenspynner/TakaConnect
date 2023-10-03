@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:takaconnect/components/seller_card.dart';
 import 'package:takaconnect/models/Product.dart';
-import 'package:takaconnect/screens/home/components/section_title.dart';
 import 'package:takaconnect/utils/size_config.dart';
 
 class PopularSeller extends StatelessWidget {

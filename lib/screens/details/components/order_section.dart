@@ -29,37 +29,44 @@ class _OrderDetailsState extends State<OrderDetails> {
       children: [
         Visibility(
           visible: _show_order_panel,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Form(
-              key: _dropdownFormKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    //controller: controllerCounts,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: 'Enter Quantity',
-                      suffixIcon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.category,
+          maintainAnimation: true,
+          maintainState: true,
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.fastOutSlowIn,
+            opacity: _show_order_panel ? 1 : 0,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Form(
+                key: _dropdownFormKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      //controller: controllerCounts,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: 'Enter Quantity',
+                        suffixIcon: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.category,
+                          ),
                         ),
                       ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Enter Quantity Counts";
+                        } else {
+                          //   if (int.parse(controllerCounts.text) <= 0) {
+                          //     return "Total Counts can't be 0 or Less than 0";
+                          //   } else {
+                          //     return null;
+                          //   }
+                        }
+                      },
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Enter Quantity Counts";
-                      } else {
-                        //   if (int.parse(controllerCounts.text) <= 0) {
-                        //     return "Total Counts can't be 0 or Less than 0";
-                        //   } else {
-                        //     return null;
-                        //   }
-                      }
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
