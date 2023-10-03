@@ -22,3 +22,13 @@ class Body extends StatelessWidget {
     );
   }
 }
+
+
+// I/flutter (10016): Organics,Saw Dust,Kisauni
+// I/flutter (10016): Metals,Heavy,Bamburi
+// I/flutter (10016): Plastics,PET,Nyali
+// I/flutter (10016): Glass,Broken Glass,Mkomani
+// I/flutter (10016): Organics,Saw Dust,Kisauni
+// I/flutter (10016): Metals,Heavy,Bamburi
+// I/flutter (10016): Plastics,PET,Nyali
+// I/flutter (10016): Glass,Broken Glass,Mkomani

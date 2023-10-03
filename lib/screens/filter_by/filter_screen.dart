@@ -361,16 +361,19 @@ class _FilterScreenState extends State<FilterScreen> {
                       text: "Apply Filter",
                       press: () {
                         if (_dropdownFormKey.currentState!.validate()) {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
                           Navigator.pushNamed(
                             context,
                             SellerScreen.routeName,
                             arguments: {
                               'barTitle': selectedValue1 == 'All Categories'? 'Product List': '$selectedValue1 Sellers',
+                              'filterTitle': selectedValue1,
                               'filterType': selectedValue2,
                               'filterCounty': selectedValue3,
                             },
                           );
-                          Navigator.pop(context);
+
                         }
                       },
                     ),

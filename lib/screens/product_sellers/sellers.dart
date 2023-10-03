@@ -14,6 +14,7 @@ class SellerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
+    int _iterateSellers = 0;
 
     //print(arguments['barTitle']);
     return Scaffold(
@@ -70,11 +71,51 @@ class SellerScreen extends StatelessWidget {
                   ...List.generate(
                     demoProducts.length,
                     (index) {
-                      print('${arguments['barTitle']} ,${arguments['filterType']} ,${arguments['filterCounty']}');
+                      //print('${arguments['barTitle']} ,${arguments['filterType']} ,${arguments['filterCounty']}');
+                      //print('${arguments['barTitle']},${arguments['filterType']},${arguments['filterCounty']},${arguments['filterCounty']},${demoCategories[_iterateSellers].subcounty},$_iterateSellers');
 
-                      // print(
-                      //     '${demoProducts[index].title},${demoProducts[index].materialType},${demoProducts[index].subcounty}');
-                      return SellerCard(product: demoProducts[index]);
+                      //CASE : Product List ,All Categories Types ,All Sub-County
+                      if (arguments['barTitle'] == 'Product List' &&
+                          arguments['filterType'] == 'All Categories Types' &&
+                          arguments['filterCounty'] == 'All Sub-County') {
+                        return SellerCard(product: demoProducts[index]);
+                      }
+
+                      //CASE : Product List ,All Categories Types ,Changamwe
+                      if (arguments['barTitle'] == 'Product List' &&
+                          arguments['filterType'] == 'All Categories Types' &&
+                          arguments['filterCounty'] != 'All Sub-County') {
+
+                        return demoProducts[index].subcounty != arguments['filterCounty'] ?const SizedBox.shrink(): SellerCard(product: demoProducts[index]);
+                      }
+
+                      //Paper Sellers ,Cardboard ,All Sub-County
+                      if (arguments['barTitle'] != 'Product List' &&
+                          arguments['filterType'] != 'All Categories Types' &&
+                          arguments['filterCounty'] == 'All Sub-County') {
+
+                        return demoProducts[index].title != arguments['filterTitle'] && demoProducts[index].materialType != arguments['filterType'] ?const SizedBox.shrink(): SellerCard(product: demoProducts[index]);
+
+                      }
+
+                      //CASE : Rubber Sellers ,Tyre ,Kisauni
+                      if (arguments['barTitle'] != 'Product List' &&
+                          arguments['filterType'] != 'All Categories Types' &&
+                          arguments['filterCounty'] != 'All Sub-County') {
+
+                        return demoProducts[index].title != arguments['filterTitle'] && demoProducts[index].materialType != arguments['filterType'] && demoProducts[index].subcounty != arguments['filterCounty'] ?const SizedBox.shrink(): SellerCard(product: demoProducts[index]);
+
+                      }
+
+                      //CASE : Product List ,null ,null
+                      if (arguments['barTitle'] == 'Product List' &&
+                          arguments['filterType'] != 'All Categories Types' &&
+                          arguments['filterCounty'] != 'All Sub-County') {
+                        return SellerCard(product: demoProducts[index]);
+                      }
+
+                      return const SizedBox
+                          .shrink(); // here by default width and height is 0
                     },
                   ),
                   SizedBox(height: getProportionateScreenWidth(20)),
