@@ -15,7 +15,7 @@ class PopularProducts extends StatelessWidget {
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: SectionTitle(title: "Categories", press: () {Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': 'Product List'}, );}),
+          child: SectionTitle(title: "Categories", press: () {Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': 'Product List'},);}),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(

@@ -20,18 +20,12 @@ class PopularSeller extends StatelessWidget {
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          //child: Row(
-          // child: Column(
-          //   children: [
-          //     Text('Okobo'),
-          //   ],
-          // ),
           child: Column(
             children: [
               ...List.generate(
                 demoProducts.length,
                     (index) {
-                      print('${demoProducts[index].title},${demoProducts[index].materialType},${demoProducts[index].subcounty}');
+                      //print('${demoProducts[index].title},${demoProducts[index].materialType},${demoProducts[index].subcounty}');
                   //if (demoProducts[index].isPopular) {
                     return SellerCard(product: demoProducts[index]);
                   //}

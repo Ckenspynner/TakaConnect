@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takaconnect/screens/product_sellers/sellers.dart';
 
 import '../models/Product.dart';
 import '../screens/details/details_screen.dart';
@@ -23,11 +24,14 @@ class ProductCard extends StatelessWidget {
       child: SizedBox(
         width: getProportionateScreenWidth(width),
         child: GestureDetector(
-          onTap: () => Navigator.pushNamed(
-            context,
-            DetailsScreen.routeName,
-            arguments: ProductDetailsArguments(product: product),
-          ),
+          //onTap: (){print(product.title);},
+          onTap: () => Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': '${product.title} Sellers','filterTitle': product.title,},),
+
+          //     Navigator.pushNamed(
+          //   context,
+          //   DetailsScreen.routeName,
+          //   arguments: ProductDetailsArguments(product: product),
+          // ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

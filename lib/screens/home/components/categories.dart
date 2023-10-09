@@ -19,11 +19,17 @@ class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> categories = [
-      {"icon": "assets/icons/Flash Icon.svg", "text": "Seller"},
-      {"icon": "assets/icons/Bill Icon.svg", "text": "Buyer"},
-      {"icon": "assets/icons/Game Icon.svg", "text": "Recycler"},
+      // {"icon": "assets/icons/Flash Icon.svg", "text": "Seller"},
+      // {"icon": "assets/icons/Bill Icon.svg", "text": "Buyer"},
+      // {"icon": "assets/icons/Game Icon.svg", "text": "Recycler"},
+      // {"icon": "assets/icons/Gift Icon.svg", "text": "Partners"},
+      // {"icon": "assets/icons/Discover.svg", "text": "Help"},
+
+      {"icon": "assets/icons/seller.svg", "text": "Seller"},
+      {"icon": "assets/icons/buyer.svg", "text": "Buyer"},
+      {"icon": "assets/icons/recycle.svg", "text": "Recycler"},
       {"icon": "assets/icons/Gift Icon.svg", "text": "Partners"},
-      {"icon": "assets/icons/Discover.svg", "text": "Help"},
+      {"icon": "assets/icons/help.svg", "text": "Help"},
     ];
     return Column(
       children: [
@@ -110,12 +116,13 @@ class CategoryCard extends StatelessWidget {
               height: getProportionateScreenWidth(55),
               width: getProportionateScreenWidth(55),
               decoration: BoxDecoration(
-                color: Color(0xFFFFECDF),
+                //color: Color(0xFFFFECDF),
+                color: const Color(0xFFC4DFB4),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: SvgPicture.asset(icon!),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(text!, textAlign: TextAlign.center)
           ],
         ),

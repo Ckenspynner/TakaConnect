@@ -37,21 +37,6 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   //Dropdown parameters definition
-  List<DropdownMenuItem<String>> get dropdownItems2 {
-    List<DropdownMenuItem<String>> menuItems = [
-      const DropdownMenuItem(
-          value: "Select Category Type", child: Text("Select Category Type")),
-      const DropdownMenuItem(value: "FP", child: Text("Food Product (FP)")),
-      const DropdownMenuItem(
-          value: "HP", child: Text("Household Product (HP)")),
-      const DropdownMenuItem(value: "0", child: Text("Others (O)")),
-      const DropdownMenuItem(value: "PC", child: Text("Personal Care (PC)")),
-      const DropdownMenuItem(value: "SM", child: Text("Smoking Material (SM)")),
-    ];
-    return menuItems;
-  }
-
-  //Dropdown parameters definition
   List<DropdownMenuItem<String>> get dropdownNull {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
@@ -68,6 +53,8 @@ class _FilterScreenState extends State<FilterScreen> {
       const DropdownMenuItem(
           value: "Select Category Type", child: Text("Select Category Type")),
       const DropdownMenuItem(
+          value: "All Categories Types", child: Text("All Categories Types")),
+      const DropdownMenuItem(
           value: "None synthetic (Cotton/Wool)",
           child: Text("None synthetic (Cotton/Wool)")),
       const DropdownMenuItem(value: "Synthetic", child: Text("Synthetic")),
@@ -80,6 +67,8 @@ class _FilterScreenState extends State<FilterScreen> {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
           value: "Select Category Type", child: Text("Select Category Type")),
+      const DropdownMenuItem(
+          value: "All Categories Types", child: Text("All Categories Types")),
       const DropdownMenuItem(
           value: "Car Batteries", child: Text("Car Batteries")),
       const DropdownMenuItem(
@@ -99,6 +88,8 @@ class _FilterScreenState extends State<FilterScreen> {
       const DropdownMenuItem(
           value: "Select Category Type", child: Text("Select Category Type")),
       const DropdownMenuItem(
+          value: "All Categories Types", child: Text("All Categories Types")),
+      const DropdownMenuItem(
           value: "Broken Glass", child: Text("Broken Glass")),
       const DropdownMenuItem(
           value: "Drinking Bottle", child: Text("Drinking Bottle")),
@@ -113,6 +104,8 @@ class _FilterScreenState extends State<FilterScreen> {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
           value: "Select Category Type", child: Text("Select Category Type")),
+      const DropdownMenuItem(
+          value: "All Categories Types", child: Text("All Categories Types")),
       const DropdownMenuItem(value: "Heavy", child: Text("Heavy")),
       const DropdownMenuItem(value: "Light", child: Text("Light")),
       const DropdownMenuItem(value: "Medium", child: Text("Medium")),
@@ -125,6 +118,8 @@ class _FilterScreenState extends State<FilterScreen> {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
           value: "Select Category Type", child: Text("Select Category Type")),
+      const DropdownMenuItem(
+          value: "All Categories Types", child: Text("All Categories Types")),
       const DropdownMenuItem(value: "Bones", child: Text("Bones")),
       const DropdownMenuItem(
           value: "Coconut Husks", child: Text("Coconut Husks")),
@@ -141,6 +136,8 @@ class _FilterScreenState extends State<FilterScreen> {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
           value: "Select Category Type", child: Text("Select Category Type")),
+      const DropdownMenuItem(
+          value: "All Categories Types", child: Text("All Categories Types")),
       const DropdownMenuItem(value: "Cardboard", child: Text("Cardboard")),
       const DropdownMenuItem(
           value: "Magazine/Newspaper", child: Text("Magazine/Newspaper")),
@@ -155,6 +152,8 @@ class _FilterScreenState extends State<FilterScreen> {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
           value: "Select Category Type", child: Text("Select Category Type")),
+      const DropdownMenuItem(
+          value: "All Categories Types", child: Text("All Categories Types")),
       const DropdownMenuItem(value: "HDPE", child: Text("HDPE")),
       const DropdownMenuItem(value: "LDPE", child: Text("LDPE")),
       const DropdownMenuItem(value: "PET", child: Text("PET")),
@@ -170,6 +169,8 @@ class _FilterScreenState extends State<FilterScreen> {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
           value: "Select Category Type", child: Text("Select Category Type")),
+      const DropdownMenuItem(
+          value: "All Categories Types", child: Text("All Categories Types")),
       const DropdownMenuItem(value: "Flip-Flop", child: Text("Flip-Flop")),
       const DropdownMenuItem(value: "Shoes/Soles", child: Text("Shoes/Soles")),
       const DropdownMenuItem(value: "Tyre", child: Text("Tyre")),

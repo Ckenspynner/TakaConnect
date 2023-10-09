@@ -15,7 +15,6 @@ class SellerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
-    int _iterateSellers = 0;
 
     //print(arguments['barTitle']);
     return Scaffold(
@@ -41,13 +40,15 @@ class SellerScreen extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, FilterScreen.routeName);
             },
-            child: arguments['barTitle'] != 'Your Products'?Container(
-              padding: const EdgeInsets.only(right: 25),
-              child: const Icon(
-                Icons.sort,
-                color: Colors.black,
-              ),
-            ):Container(),
+            child: arguments['barTitle'] != 'Your Products'
+                ? Container(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: const Icon(
+                      Icons.sort,
+                      color: Colors.black,
+                    ),
+                  )
+                : Container(),
           ),
         ],
         title: Container(
@@ -75,6 +76,14 @@ class SellerScreen extends StatelessWidget {
                       //print('${arguments['barTitle']} ,${arguments['filterType']} ,${arguments['filterCounty']}');
                       //print('${arguments['barTitle']},${arguments['filterType']},${arguments['filterCounty']},${arguments['filterCounty']},${demoCategories[_iterateSellers].subcounty},$_iterateSellers');
 
+                      //CASE : Paper Sellers ,All Categories Types ,All Sub-County
+                      if (arguments['barTitle'] == '${arguments['filterTitle']} Sellers') {
+                        return demoProducts[index].title !=
+                                arguments['filterTitle']
+                            ? const SizedBox.shrink()
+                            : SellerCard(product: demoProducts[index]);
+                      }
+
                       //CASE : Product List ,All Categories Types ,All Sub-County
                       if (arguments['barTitle'] == 'Product List' &&
                           arguments['filterType'] == 'All Categories Types' &&
@@ -86,17 +95,22 @@ class SellerScreen extends StatelessWidget {
                       if (arguments['barTitle'] == 'Product List' &&
                           arguments['filterType'] == 'All Categories Types' &&
                           arguments['filterCounty'] != 'All Sub-County') {
-
-                        return demoProducts[index].subcounty != arguments['filterCounty'] ?const SizedBox.shrink(): SellerCard(product: demoProducts[index]);
+                        return demoProducts[index].subcounty !=
+                                arguments['filterCounty']
+                            ? const SizedBox.shrink()
+                            : SellerCard(product: demoProducts[index]);
                       }
 
                       //Paper Sellers ,Cardboard ,All Sub-County
                       if (arguments['barTitle'] != 'Product List' &&
                           arguments['filterType'] != 'All Categories Types' &&
                           arguments['filterCounty'] == 'All Sub-County') {
-
-                        return demoProducts[index].title != arguments['filterTitle'] && demoProducts[index].materialType != arguments['filterType'] ?const SizedBox.shrink(): SellerCard(product: demoProducts[index]);
-
+                        return demoProducts[index].title !=
+                                    arguments['filterTitle'] &&
+                                demoProducts[index].materialType !=
+                                    arguments['filterType']
+                            ? const SizedBox.shrink()
+                            : SellerCard(product: demoProducts[index]);
                       }
 
                       //CASE : Your Products ,null ,null
@@ -110,9 +124,14 @@ class SellerScreen extends StatelessWidget {
                       if (arguments['barTitle'] != 'Product List' &&
                           arguments['filterType'] != 'All Categories Types' &&
                           arguments['filterCounty'] != 'All Sub-County') {
-
-                        return demoProducts[index].title != arguments['filterTitle'] && demoProducts[index].materialType != arguments['filterType'] && demoProducts[index].subcounty != arguments['filterCounty'] ?const SizedBox.shrink(): SellerCard(product: demoProducts[index]);
-
+                        return demoProducts[index].title !=
+                                    arguments['filterTitle'] &&
+                                demoProducts[index].materialType !=
+                                    arguments['filterType'] &&
+                                demoProducts[index].subcounty !=
+                                    arguments['filterCounty']
+                            ? const SizedBox.shrink()
+                            : SellerCard(product: demoProducts[index]);
                       }
 
                       //CASE : Product List ,null ,null

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takaconnect/screens/addproducts/addproducts.dart';
 import 'package:takaconnect/screens/home/components/icon_btn_with_counter.dart';
 import 'package:takaconnect/screens/product_sellers/sellers.dart';
 import '../../../utils/size_config.dart';
@@ -32,7 +33,7 @@ class SpecialOffers extends StatelessWidget {
                 category: "See Your Products",
                 numOfBrands: 18,
                 press: () {
-                  Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': 'Your Products'}, );
+                  Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': 'Your Products'},);
                 },
               ),
               SpecialOfferCard(
@@ -41,7 +42,7 @@ class SpecialOffers extends StatelessWidget {
                 category: "Add Products",
                 //numOfBrands: 24,
                 press: () {
-                  print('object');
+                  Navigator.pushNamed(context, AddProductScreen.routeName,arguments: {'barTitle': 'Add Products'},);
                 },
               ),
               SizedBox(width: getProportionateScreenWidth(20)),
@@ -122,14 +123,19 @@ class SpecialOfferCard extends StatelessWidget {
                 Positioned.fill(
                   child: Align(
                     alignment: Alignment.bottomRight,
-                    child: numOfBrands != null? null: Container(
-                      color: Colors.greenAccent,
-                      child: IconBtnWithCounter(
-                        svgSrc: "assets/icons/add.svg",
-                        //numOfitem: 3,
-                        press: () {},
-                      ),
+                    child: numOfBrands != null? null: IconBtnWithCounter(
+                      svgSrc: "assets/icons/add.svg",
+                      //numOfitem: 3,
+                      press: () {Navigator.pushNamed(context, AddProductScreen.routeName,arguments: {'barTitle': 'Add Products'},);},
                     ),
+                    // Container(
+                    //   color: Colors.greenAccent,
+                    //   child: IconBtnWithCounter(
+                    //     svgSrc: "assets/icons/add.svg",
+                    //     //numOfitem: 3,
+                    //     press: () {},
+                    //   ),
+                    // ),
                   ),
                 ),
               ],
