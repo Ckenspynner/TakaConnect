@@ -8,16 +8,17 @@ class SplashContent extends StatelessWidget {
     Key? key,
     this.text,
     this.image,
+    this.details,
   }) : super(key: key);
-  final String? text, image;
+  final String? text, image, details;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Spacer(),
+        const Spacer(),
         Text(
-          "TOKOTO",
+          "TakaConnect",
           style: TextStyle(
             fontSize: getProportionateScreenWidth(36),
             color: kPrimaryColor,
@@ -28,11 +29,15 @@ class SplashContent extends StatelessWidget {
           text!,
           textAlign: TextAlign.center,
         ),
-        Spacer(flex: 2),
+        const Spacer(flex: 2),
         Image.asset(
           image!,
           height: getProportionateScreenHeight(265),
           width: getProportionateScreenWidth(235),
+        ),
+        Text(
+          details!,
+          textAlign: TextAlign.center,
         ),
       ],
     );

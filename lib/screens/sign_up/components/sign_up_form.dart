@@ -29,10 +29,11 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   void removeError({String? error}) {
-    if (errors.contains(error))
+    if (errors.contains(error)) {
       setState(() {
         errors.remove(error);
       });
+    }
   }
 
   @override
@@ -85,7 +86,7 @@ class _SignUpFormState extends State<SignUpForm> {
         }
         return null;
       },
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         labelText: "Confirm Password",
         hintText: "Re-enter your password",
         // If  you are using latest version of flutter then lable text and hint text shown like this
@@ -118,7 +119,7 @@ class _SignUpFormState extends State<SignUpForm> {
         }
         return null;
       },
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         labelText: "Password",
         hintText: "Enter your password",
         // If  you are using latest version of flutter then lable text and hint text shown like this

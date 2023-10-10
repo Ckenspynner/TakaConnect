@@ -15,17 +15,23 @@ class _BodyState extends State<Body> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
-      "text": "Welcome to Tokoto, Let’s shop!",
-      "image": "assets/images/splash_1.png"
+      "text": "Welcome to TakaConnect, Let’s sell, buy and\n recycle!",
+      //"image": "assets/images/splash_1.png"
+      "image": "assets/images/appLogo.png",
+      "details": "TakaConnect Logo"
+
     },
     {
       "text":
-          "We help people conect with store \naround United State of America",
-      "image": "assets/images/splash_2.png"
+          "We help sellers, buyers and recyclers connect\naround Counties.",
+      "image": "assets/images/Interactive Map.png",
+      "details": "Our Interactive Map"
+
     },
     {
-      "text": "We show the easy way to shop. \nJust stay at home with us",
-      "image": "assets/images/splash_3.png"
+      "text": "We show the easy way to shop and recycle. \nJust stay at home with us.",
+      "image": "assets/images/splash_3.png",
+      "details": ""
     },
   ];
   @override
@@ -47,6 +53,7 @@ class _BodyState extends State<Body> {
                 itemBuilder: (context, index) => SplashContent(
                   image: splashData[index]["image"],
                   text: splashData[index]['text'],
+                  details: splashData[index]['details'],
                 ),
               ),
             ),

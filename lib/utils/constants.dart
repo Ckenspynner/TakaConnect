@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:takaconnect/utils/size_config.dart';
 
-const kPrimaryColor = Color(0xFFFF7643);
-//const kPrimaryColor = Color(0xFFC4DFB4);//Color(0xFFFF7643);
-const kPrimaryLightColor = Color(0xFFFFECDF);
+//const kPrimaryColor = Color(0xFFFF7643);
+const kPrimaryColor = Colors.green;//Color(0xFFFF7643);
+const kPrimaryLightColor = Color(0xFFC4DFB4);//Color(0xFFFF7643);
+//const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
@@ -46,6 +47,6 @@ final otpInputDecoration = InputDecoration(
 OutlineInputBorder outlineInputBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(getProportionateScreenWidth(15)),
-    borderSide: BorderSide(color: kTextColor),
+    borderSide: const BorderSide(color: kTextColor),
   );
 }

@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:takaconnect/screens/addproducts/components/top_rounded_container.dart';
+import 'package:takaconnect/utils/size_config.dart';
+
+class AppLogo extends StatelessWidget {
+  const AppLogo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TopRoundedContainer(
+      color: Colors.white,
+      child: Column(
+        children: [
+          Image.asset(
+            "assets/images/taka_connect.png",
+            width: getProportionateScreenWidth(80),
+            height: getProportionateScreenWidth(80),
+          ),
+          const Text('--TakaConnect--'),
+        ],
+      ),
+    );
+  }
+}

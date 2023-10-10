@@ -1,8 +1,10 @@
 import 'package:flutter/widgets.dart';
+import 'package:takaconnect/main.dart';
 import 'package:takaconnect/screens/addproducts/addproducts.dart';
 import 'package:takaconnect/screens/filter_by/filter_screen.dart';
 import 'package:takaconnect/screens/home/home_screen.dart';
 import 'package:takaconnect/screens/product_sellers/sellers.dart';
+import 'package:takaconnect/screens/splash/SplashAnimation.dart';
 
 import '../screens/cart/cart_screen.dart';
 import '../screens/complete_profile/complete_profile_screen.dart';
@@ -32,4 +34,5 @@ final Map<String, WidgetBuilder> routes = {
   SellerScreen.routeName: (context) => const SellerScreen(),
   FilterScreen.routeName: (context) => const FilterScreen(),
   AddProductScreen.routeName: (context) => const AddProductScreen(),
+  SplashAnimation.routeName: (context) => const SplashAnimation(),
 };

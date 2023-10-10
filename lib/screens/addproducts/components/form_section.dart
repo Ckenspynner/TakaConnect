@@ -348,59 +348,59 @@ class _AddProductFormState extends State<AddProductForm> {
                     SizedBox(
                       height: getProportionateScreenWidth(20.0),
                     ),
-                    TextFormField(
-                      //controller: controllerCounts,
-                      //keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: 'Location',
-                        hintText: 'e.g Kisauni',
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.category,
-                          ),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Enter Location Details";
-                        } else {
-                          //   if (int.parse(controllerCounts.text) <= 0) {
-                          //     return "Total Counts can't be 0 or Less than 0";
-                          //   } else {
-                          //     return null;
-                          //   }
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: getProportionateScreenWidth(30.0),
-                    ),
-                    TextFormField(
-                      //controller: controllerCounts,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: 'Phone Number',
-                        hintText: 'e.g 0712345678',
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.phone_android_rounded,
-                          ),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Enter Phone Number";
-                        } else {
-                          if (value.length < 0 || value.length > 10) {
-                            return "Total Counts can't be 0 or Less than 0";
-                          } else {
-                            return null;
-                          }
-                        }
-                      },
-                    ),
+                    // TextFormField(
+                    //   //controller: controllerCounts,
+                    //   //keyboardType: TextInputType.number,
+                    //   decoration: InputDecoration(
+                    //     labelText: 'Location',
+                    //     hintText: 'e.g Kisauni',
+                    //     suffixIcon: IconButton(
+                    //       onPressed: () {},
+                    //       icon: const Icon(
+                    //         Icons.category,
+                    //       ),
+                    //     ),
+                    //   ),
+                    //   validator: (value) {
+                    //     if (value!.isEmpty) {
+                    //       return "Enter Location Details";
+                    //     } else {
+                    //       //   if (int.parse(controllerCounts.text) <= 0) {
+                    //       //     return "Total Counts can't be 0 or Less than 0";
+                    //       //   } else {
+                    //       //     return null;
+                    //       //   }
+                    //     }
+                    //   },
+                    // ),
+                    // SizedBox(
+                    //   height: getProportionateScreenWidth(30.0),
+                    // ),
+                    // TextFormField(
+                    //   //controller: controllerCounts,
+                    //   keyboardType: TextInputType.number,
+                    //   decoration: InputDecoration(
+                    //     labelText: 'Phone Number',
+                    //     hintText: 'e.g 0712345678',
+                    //     suffixIcon: IconButton(
+                    //       onPressed: () {},
+                    //       icon: const Icon(
+                    //         Icons.phone_android_rounded,
+                    //       ),
+                    //     ),
+                    //   ),
+                    //   validator: (value) {
+                    //     if (value!.isEmpty) {
+                    //       return "Enter Phone Number";
+                    //     } else {
+                    //       if (value.length < 0 || value.length > 10) {
+                    //         return "Total Counts can't be 0 or Less than 0";
+                    //       } else {
+                    //         return null;
+                    //       }
+                    //     }
+                    //   },
+                    // ),
                   ],
                 ),
               ),
