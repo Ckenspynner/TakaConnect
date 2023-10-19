@@ -39,12 +39,17 @@ class SearchField extends StatelessWidget {
           //   svgSrc: "assets/icons/Cart Icon.svg",
           //   press: () => Navigator.pushNamed(context, CartScreen.routeName),
           // ),
-          IconBtnWithCounter(
-            svgSrc: "assets/icons/Menu.svg",
-            //numOfitem: 3,
-            press: () {},
+
+          // IconBtnWithCounter(
+          //   svgSrc: "assets/icons/Menu.svg",
+          //   //numOfitem: 3,
+          //   press: () {},          // ),
+          Image.asset(
+            "assets/images/appLogo.png",
+            //"assets/images/success.png",
+            height: SizeConfig.screenHeight * 0.1, //40%
           ),
-          const SizedBox(width: 30),
+          const SizedBox(width: 10),
           const Text('Welcome,\nKenneth Otieno',maxLines: 2, textAlign: TextAlign.start)
 
         ],

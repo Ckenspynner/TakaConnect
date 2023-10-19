@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takaconnect/screens/login_success/login_success_screen.dart';
 
 import '../../../components/default_button.dart';
 import '../../../utils/constants.dart';
@@ -42,6 +43,7 @@ class _OtpFormState extends State<OtpForm> {
 
   @override
   Widget build(BuildContext context) {
+
     return Form(
       child: Column(
         children: [
@@ -109,7 +111,7 @@ class _OtpFormState extends State<OtpForm> {
           SizedBox(height: SizeConfig.screenHeight * 0.15),
           DefaultButton(
             text: "Continue",
-            press: () {},
+            press: () {Navigator.pushNamed(context, LoginSuccessScreen.routeName);},
           )
         ],
       ),

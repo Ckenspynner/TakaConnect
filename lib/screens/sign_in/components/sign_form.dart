@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takaconnect/screens/otp/otp_screen.dart';
 
 import '../../../components/custom_surfix_icon.dart';
 import '../../../components/default_button.dart';
@@ -17,7 +18,7 @@ class SignForm extends StatefulWidget {
 class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
   String? email;
-  String? password;
+  String? password, otpPhoneNumber;
   bool? remember = false;
   final List<String?> errors = [];
 
@@ -80,9 +81,11 @@ class _SignFormState extends State<SignForm> {
               //   KeyboardUtil.hideKeyboard(context);
               //   Navigator.pushNamed(context, LoginSuccessScreen.routeName);
               // }
-
-              KeyboardUtil.hideKeyboard(context);
-              Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+              if (_formKey.currentState!.validate()) {
+                KeyboardUtil.hideKeyboard(context);
+                //Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                Navigator.pushNamed(context, OtpScreen.routeName,arguments: {'otpPhoneNumber': otpPhoneNumber},);
+              }
             },
           ),
         ],
@@ -92,23 +95,24 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildPhoneNumberFormField() {
     return TextFormField(
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.phone,
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
+            otpPhoneNumber = value;
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
-        } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
+          removeError(error: kPhoneNumberNullError);
+        } else if (value.length > 10 || value.length < 10) {
+          removeError(error: kInvalidPhoneError);
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
-          addError(error: kEmailNullError);
+          addError(error: kPhoneNumberNullError);
           return "";
-        } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-          return "";
+        } else if (value!.length > 10 || value!.length < 10) {
+          removeError(error: kInvalidPhoneError);
+          return kInvalidPhoneError;
         }
         return null;
       },
@@ -123,69 +127,69 @@ class _SignFormState extends State<SignForm> {
     );
   }
 
-  // TextFormField buildPasswordFormField() {
-  //   return TextFormField(
-  //     obscureText: true,
-  //     onSaved: (newValue) => password = newValue,
-  //     onChanged: (value) {
-  //       if (value.isNotEmpty) {
-  //         removeError(error: kPassNullError);
-  //       } else if (value.length >= 8) {
-  //         removeError(error: kShortPassError);
-  //       }
-  //       return null;
-  //     },
-  //     validator: (value) {
-  //       if (value!.isEmpty) {
-  //         addError(error: kPassNullError);
-  //         return "";
-  //       } else if (value.length < 8) {
-  //         addError(error: kShortPassError);
-  //         return "";
-  //       }
-  //       return null;
-  //     },
-  //     decoration: const InputDecoration(
-  //       labelText: "Password",
-  //       hintText: "Enter your password",
-  //       // If  you are using latest version of flutter then lable text and hint text shown like this
-  //       // if you r using flutter less then 1.20.* then maybe this is not working properly
-  //       floatingLabelBehavior: FloatingLabelBehavior.always,
-  //       suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
-  //     ),
-  //   );
-  // }
+// TextFormField buildPasswordFormField() {
+//   return TextFormField(
+//     obscureText: true,
+//     onSaved: (newValue) => password = newValue,
+//     onChanged: (value) {
+//       if (value.isNotEmpty) {
+//         removeError(error: kPassNullError);
+//       } else if (value.length >= 8) {
+//         removeError(error: kShortPassError);
+//       }
+//       return null;
+//     },
+//     validator: (value) {
+//       if (value!.isEmpty) {
+//         addError(error: kPassNullError);
+//         return "";
+//       } else if (value.length < 8) {
+//         addError(error: kShortPassError);
+//         return "";
+//       }
+//       return null;
+//     },
+//     decoration: const InputDecoration(
+//       labelText: "Password",
+//       hintText: "Enter your password",
+//       // If  you are using latest version of flutter then lable text and hint text shown like this
+//       // if you r using flutter less then 1.20.* then maybe this is not working properly
+//       floatingLabelBehavior: FloatingLabelBehavior.always,
+//       suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+//     ),
+//   );
+// }
 
-  // TextFormField buildPhoneNumberFormField() {
-  //   return TextFormField(
-  //     keyboardType: TextInputType.emailAddress,
-  //     onSaved: (newValue) => email = newValue,
-  //     onChanged: (value) {
-  //       if (value.isNotEmpty) {
-  //         removeError(error: kEmailNullError);
-  //       } else if (emailValidatorRegExp.hasMatch(value)) {
-  //         removeError(error: kInvalidEmailError);
-  //       }
-  //       return null;
-  //     },
-  //     validator: (value) {
-  //       if (value!.isEmpty) {
-  //         addError(error: kEmailNullError);
-  //         return "";
-  //       } else if (!emailValidatorRegExp.hasMatch(value)) {
-  //         addError(error: kInvalidEmailError);
-  //         return "";
-  //       }
-  //       return null;
-  //     },
-  //     decoration: InputDecoration(
-  //       labelText: "Email",
-  //       hintText: "Enter your email",
-  //       // If  you are using latest version of flutter then lable text and hint text shown like this
-  //       // if you r using flutter less then 1.20.* then maybe this is not working properly
-  //       floatingLabelBehavior: FloatingLabelBehavior.always,
-  //       suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
-  //     ),
-  //   );
-  // }
+// TextFormField buildPhoneNumberFormField() {
+//   return TextFormField(
+//     keyboardType: TextInputType.emailAddress,
+//     onSaved: (newValue) => email = newValue,
+//     onChanged: (value) {
+//       if (value.isNotEmpty) {
+//         removeError(error: kPhoneNumberNullError);
+//       } else if (emailValidatorRegExp.hasMatch(value)) {
+//         removeError(error: kInvalidEmailError);
+//       }
+//       return null;
+//     },
+//     validator: (value) {
+//       if (value!.isEmpty) {
+//         addError(error: kPhoneNumberNullError);
+//         return "";
+//       } else if (!emailValidatorRegExp.hasMatch(value)) {
+//         addError(error: kInvalidEmailError);
+//         return "";
+//       }
+//       return null;
+//     },
+//     decoration: InputDecoration(
+//       labelText: "Email",
+//       hintText: "Enter your email",
+//       // If  you are using latest version of flutter then lable text and hint text shown like this
+//       // if you r using flutter less then 1.20.* then maybe this is not working properly
+//       floatingLabelBehavior: FloatingLabelBehavior.always,
+//       suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
+//     ),
+//   );
+// }
 }

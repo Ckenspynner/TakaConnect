@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:takaconnect/main.dart';
+import 'package:takaconnect/utils/http_strings.dart';
 
 import '../../../utils/constants.dart';
 import '../../../utils/size_config.dart';
 import '../../sign_in/sign_in_screen.dart';
 import '../components/splash_content.dart';
 import '../../../components/default_button.dart';
+import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
   @override
@@ -34,6 +37,7 @@ class _BodyState extends State<Body> {
       "details": ""
     },
   ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -87,7 +91,10 @@ class _BodyState extends State<Body> {
                     DefaultButton(
                       text: "Continue",
                       press: () {
-                        Navigator.pushNamed(context, SignInScreen.routeName);
+                        //Navigator.pushNamed(context, SignInScreen.routeName);
+                        //django_get();
+                        //django_post();
+                        //django_main();
                       },
                     ),
                     Spacer(),

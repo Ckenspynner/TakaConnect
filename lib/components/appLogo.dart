@@ -12,7 +12,7 @@ class AppLogo extends StatelessWidget {
       child: Column(
         children: [
           Image.asset(
-            "assets/images/taka_connect.png",
+            "assets/images/appLogo.png",
             width: getProportionateScreenWidth(80),
             height: getProportionateScreenWidth(80),
           ),
