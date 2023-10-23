@@ -28,7 +28,7 @@ class Body extends StatelessWidget {
             //SpecialOffers(),
             //SizedBox(height: getProportionateScreenWidth(30)),
             //const PopularProducts(),
-            const WastePlayerMap(),
+            //const WastePlayerMap(),
           ],
         ),
       ),

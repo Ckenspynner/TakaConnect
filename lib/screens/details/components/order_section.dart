@@ -5,8 +5,12 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/size_config.dart';
 
 class OrderDetails extends StatefulWidget {
+
+  final String sellerContact;
+  final String categorytype;
+  final String category;
   const OrderDetails({
-    Key? key,
+    Key? key, required this.sellerContact, required this.categorytype, required this.category,
   }) : super(key: key);
 
   @override
@@ -85,7 +89,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     if (chatText == 'Chat') {
                       //print('${random(100000000, 999999999)}');
                       Uri sms = Uri.parse(
-                          'sms:07${random(10000000, 99999999)}?body=Hello, Is this available.');
+                          'sms:${widget.sellerContact}?body=Hello, Are ${widget.categorytype} still available.');
                       if (await launchUrl(sms)) {
                         //app opened
                       } else {

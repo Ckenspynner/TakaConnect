@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:takaconnect/main.dart';
+import 'package:takaconnect/screens/addproducts/addproducts.dart';
+import 'package:takaconnect/screens/product_sellers/sellers.dart';
 import 'package:takaconnect/utils/http_strings.dart';
 
 import '../../../utils/constants.dart';
@@ -91,7 +93,9 @@ class _BodyState extends State<Body> {
                     DefaultButton(
                       text: "Continue",
                       press: () {
-                        //Navigator.pushNamed(context, SignInScreen.routeName);
+                        //Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': 'Product List'},);
+                        Navigator.pushNamed(context, SignInScreen.routeName);
+                        //Navigator.pushNamed(context, AddProductScreen.routeName,arguments: {'barTitle': 'Add Products'},);
                         //django_get();
                         //django_post();
                         //django_main();

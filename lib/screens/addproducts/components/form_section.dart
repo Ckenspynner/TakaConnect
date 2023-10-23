@@ -1,10 +1,13 @@
 import 'dart:math';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:input_quantity/input_quantity.dart';
-import 'package:takaconnect/components/default_button.dart';
-import 'package:takaconnect/screens/addproducts/components/top_rounded_container.dart';
+import 'package:takaconnect/main.dart';
+import 'package:takaconnect/utils/http_strings.dart';
 import 'package:takaconnect/utils/size_config.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:image_picker/image_picker.dart';
 
 class AddProductForm extends StatefulWidget {
   const AddProductForm({
@@ -21,7 +24,16 @@ class _AddProductFormState extends State<AddProductForm> {
 
   String selectedValue1 = "Select Category";
   String selectedValue2 = "Select Category Type";
-  String selectedValue3 = "Select Sub-County";
+  String selectedValue3 = "Select Product Color";
+
+  String sellerName = "Chrispine Odhiambo";
+  String sellerContact = "0702407935";
+  String sellerLocation = "Bamburi";
+  String county = "Mombasa";
+
+  int productQuantity = 0;
+  TextEditingController controllercolor = TextEditingController();
+  TextEditingController controllerdescription = TextEditingController();
 
   //Dropdown parameters definition
   List<DropdownMenuItem<String>> get dropdownItems1 {
@@ -187,15 +199,17 @@ class _AddProductFormState extends State<AddProductForm> {
   List<DropdownMenuItem<String>> get dropdownItems3 {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
-          value: "Select Sub-County", child: Text("Select Sub-County")),
+          value: "Select Product Color", child: Text("Select Product Color")),
       const DropdownMenuItem(
           value: "All Sub-County", child: Text("All Sub-County")),
-      const DropdownMenuItem(value: "Changamwe", child: Text("Changamwe")),
-      const DropdownMenuItem(value: "Kisauni", child: Text("Kisauni")),
-      const DropdownMenuItem(value: "Likoni", child: Text("Likoni")),
-      const DropdownMenuItem(value: "Jomvu", child: Text("Jomvu")),
-      const DropdownMenuItem(value: "Mvita", child: Text("Mvita")),
-      const DropdownMenuItem(value: "Nyali", child: Text("Nyali")),
+      const DropdownMenuItem(value: "Violet", child: Text("Violet")),
+      const DropdownMenuItem(value: "Indigo", child: Text("Indigo")),
+      const DropdownMenuItem(value: "Blue", child: Text("Blue")),
+      const DropdownMenuItem(value: "Green", child: Text("Green")),
+      const DropdownMenuItem(value: "Yellow", child: Text("Yellow")),
+      const DropdownMenuItem(value: "Orange", child: Text("Orange")),
+      const DropdownMenuItem(value: "Red", child: Text("Red")),
+      const DropdownMenuItem(value: "Other", child: Text("Other")),
     ];
     return menuItems;
   }
@@ -203,13 +217,138 @@ class _AddProductFormState extends State<AddProductForm> {
   List<DropdownMenuItem<String>> get dropdownNull2 {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
-          value: "Select Sub-County", child: Text("Select Sub-County")),
+          value: "Select Product Color", child: Text("Select Product Color")),
     ];
     return menuItems;
   }
 
+  XFile? image;
+
+  final ImagePicker picker = ImagePicker();
+
+  //we can upload image from camera or from gallery based on parameter
+  Future getImage(ImageSource media) async {
+    var img = await picker.pickImage(source: media);
+
+    setState(() {
+      image = img;
+    });
+  }
+
+  //show popup dialog
+  void myAlert() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            title: const Text('Please choose media to select'),
+            content: Container(
+              height: MediaQuery.of(context).size.height / 6,
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    //if user click this button, user can upload image from gallery
+                    onPressed: () {
+                      Navigator.pop(context);
+                      getImage(ImageSource.gallery);
+                    },
+                    child: const Row(
+                      children: [
+                        Icon(Icons.image),
+                        Text('From Gallery'),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    //if user click this button. user can upload image from camera
+                    onPressed: () {
+                      Navigator.pop(context);
+                      getImage(ImageSource.camera);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.camera),
+                        Text('From Camera'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  //SAVE PRODUCT
+  // use this to send your image
+  Future<void> uploadImage(token, seller, quantity, contact, category,
+      categorytype, color, description, county, location) async {
+    // print(seller);
+    // print(description);
+    // your token if needed
+
+    var path;
+
+    if (county == 'Mombasa') {
+      path = createmombasaproductsellerUrl;
+    }
+    if (county == 'Lamu') {
+      path = createlamuproductsellerUrl;
+    }
+    if (county == 'Kwale') {
+      path = createkwaleproductsellerUrl;
+    }
+    if (county == 'Kilifi') {
+      path = createkilifiproductsellerUrl;
+    }
+    if (county == 'Tana River') {
+      path = createtanariverproductsellerUrl;
+    }
+    if (county == 'Taita Taveta') {
+      path = createtaitatavetaproductsellerUrl;
+    }
+
+    try {
+      var headers = {
+        // 'Authorization': 'Bearer ' + "token",
+        'Authorization': ' Token $token',
+      };
+      // your endpoint and request method
+      var request = http.MultipartRequest(
+          'POST', Uri.parse(path));
+
+      request.fields.addAll({
+        'seller': '$seller'.toTitleCase(),
+        'contact': '$contact',
+        'quantity': '$quantity',
+        'category': '$category'.toTitleCase(),
+        'categorytype': '$categorytype'.toTitleCase(),
+        'color': '$color'.toTitleCase(),
+        'location': '$location'.toTitleCase(),
+        'description': '$description',
+        'county': '$county'.toTitleCase(),
+      });
+      request.files.add(await http.MultipartFile.fromPath(
+          'image', image!.path ?? 'assets/images/noimage.png'));
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        print(await response.stream.bytesToString());
+      } else {
+        print(response.reasonPhrase);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(image?.path);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -252,7 +391,6 @@ class _AddProductFormState extends State<AddProductForm> {
                           setState(() {
                             selectedValue1 = newValue!;
                             selectedValue2 = "Select Category Type";
-                            selectedValue3 = "Select Sub-County";
                           });
                         },
                         items: dropdownItems1),
@@ -283,27 +421,26 @@ class _AddProductFormState extends State<AddProductForm> {
                         onChanged: (String? newValue) {
                           setState(() {
                             selectedValue2 = newValue!;
-                            selectedValue3 = "Select Sub-County";
                           });
                         },
                         items: selectedValue1 == 'Plastics'
                             ? dropdownPlastic
                             : selectedValue1 == 'Rubber'
-                            ? dropdownRubber
-                            : selectedValue1 == 'Organics'
-                            ? dropdownOrganics
-                            : selectedValue1 == 'Paper'
-                            ? dropdownPaper
-                            : selectedValue1 == 'Glass'
-                            ? dropdownGlass
-                            : selectedValue1 == 'Metal'
-                            ? dropdownMetal
-                            : selectedValue1 == 'E_waste'
-                            ? dropdownEWaste
-                            : selectedValue1 ==
-                            'Clothes'
-                            ? dropdownClothes
-                            : dropdownNull),
+                                ? dropdownRubber
+                                : selectedValue1 == 'Organics'
+                                    ? dropdownOrganics
+                                    : selectedValue1 == 'Paper'
+                                        ? dropdownPaper
+                                        : selectedValue1 == 'Glass'
+                                            ? dropdownGlass
+                                            : selectedValue1 == 'Metal'
+                                                ? dropdownMetal
+                                                : selectedValue1 == 'E_waste'
+                                                    ? dropdownEWaste
+                                                    : selectedValue1 ==
+                                                            'Clothes'
+                                                        ? dropdownClothes
+                                                        : dropdownNull),
                     const SizedBox(
                       height: 20,
                     ),
@@ -342,71 +479,123 @@ class _AddProductFormState extends State<AddProductForm> {
                         onQtyChanged: (val) {
                           //on value changed we may set the value
                           //setstate could be called
+                          setState(() {
+                            productQuantity = val;
+                          });
                         },
                       ),
                     ),
                     SizedBox(
-                      height: getProportionateScreenWidth(20.0),
+                      height: getProportionateScreenWidth(40.0),
                     ),
-                    // TextFormField(
-                    //   //controller: controllerCounts,
-                    //   //keyboardType: TextInputType.number,
-                    //   decoration: InputDecoration(
-                    //     labelText: 'Location',
-                    //     hintText: 'e.g Kisauni',
-                    //     suffixIcon: IconButton(
-                    //       onPressed: () {},
-                    //       icon: const Icon(
-                    //         Icons.category,
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   validator: (value) {
-                    //     if (value!.isEmpty) {
-                    //       return "Enter Location Details";
-                    //     } else {
-                    //       //   if (int.parse(controllerCounts.text) <= 0) {
-                    //       //     return "Total Counts can't be 0 or Less than 0";
-                    //       //   } else {
-                    //       //     return null;
-                    //       //   }
-                    //     }
-                    //   },
-                    // ),
-                    // SizedBox(
-                    //   height: getProportionateScreenWidth(30.0),
-                    // ),
-                    // TextFormField(
-                    //   //controller: controllerCounts,
-                    //   keyboardType: TextInputType.number,
-                    //   decoration: InputDecoration(
-                    //     labelText: 'Phone Number',
-                    //     hintText: 'e.g 0712345678',
-                    //     suffixIcon: IconButton(
-                    //       onPressed: () {},
-                    //       icon: const Icon(
-                    //         Icons.phone_android_rounded,
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   validator: (value) {
-                    //     if (value!.isEmpty) {
-                    //       return "Enter Phone Number";
-                    //     } else {
-                    //       if (value.length < 0 || value.length > 10) {
-                    //         return "Total Counts can't be 0 or Less than 0";
-                    //       } else {
-                    //         return null;
-                    //       }
-                    //     }
-                    //   },
-                    // ),
+                    DropdownButtonFormField(
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color(0xFFC4DFB4), width: 2),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color(0xFFC4DFB4), width: 2),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          filled: true,
+                          fillColor: Colors.transparent,
+                        ),
+                        validator: (value) => value == "Select Product Color"
+                            ? "Select Product Color"
+                            : null,
+                        //dropdownColor: Colors.blueAccent,
+                        value: selectedValue3,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedValue3 = newValue!;
+                          });
+                        },
+                        items: dropdownItems3),
+                    SizedBox(
+                      height: getProportionateScreenWidth(40.0),
+                    ),
+                    TextFormField(
+                      controller: controllerdescription,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        labelText: 'Product Description',
+                        hintText: 'e.g Rusted building metal rod...',
+                        suffixIcon: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.edit_note,
+                          ),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Enter Product Description";
+                        }
+                        // else {
+                        //   if (value.length < 0 || value.length > 10) {
+                        //     return "Total Counts can't be 0 or Less than 0";
+                        //   } else {
+                        //     return null;
+                        //   }
+                        // }
+                      },
+                    ),
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          //if image not null show the image
+                          //if image null show text
+                          image != null
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.file(
+                                      //to show image, you type like this.
+                                      File(image!.path),
+                                      fit: BoxFit.cover,
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 300,
+                                    ),
+                                  ),
+                                )
+                              : const Text(
+                                  "No Image Uploaded",
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.redAccent),
+                                ),
+
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            height: getProportionateScreenWidth(40.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                myAlert();
+                              },
+                              child: const Text('Upload/Take Photo'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(
-                  top: getProportionateScreenWidth(60),
+                  top: getProportionateScreenWidth(30),
                   left: getProportionateScreenWidth(20),
                   right: getProportionateScreenWidth(20),
                   //vertical: 10,
@@ -429,6 +618,20 @@ class _AddProductFormState extends State<AddProductForm> {
                             //     orderText = 'Order';
                             //   }
                             // }
+                            county = 'Taita Taveta';
+                            uploadImage(
+                                '428086bf6b4d116807f29f130788e3401c2b8377',
+                                sellerName,
+                                productQuantity,
+                                sellerContact,
+                                selectedValue1,
+                                selectedValue2,
+                                selectedValue3,
+                                controllerdescription.text,
+                                county,
+                                sellerLocation);
+
+                            //print('$sellerName, $productQuantity, $sellerContact $selectedValue1, $selectedValue2, ${controllercolor.text}, ${controllerdescription.text}, $county, $sellerLocation');
                           });
                         },
                         child: Container(
@@ -441,14 +644,15 @@ class _AddProductFormState extends State<AddProductForm> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Submit Order',
+                                'Add Product',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,
                                 ), //color: kPrimaryColor),
                               ),
                               SizedBox(width: 5),
-                              Icon(Icons.shopping_cart_checkout_sharp,
+                              Icon(
+                                Icons.shopping_basket,
                                 size: 12,
                                 color: Colors.white,
                                 //color: kPrimaryColor,
@@ -464,7 +668,6 @@ class _AddProductFormState extends State<AddProductForm> {
             ],
           ),
         ),
-
       ],
     );
   }

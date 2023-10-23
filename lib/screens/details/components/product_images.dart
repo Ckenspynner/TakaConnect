@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takaconnect/data_service/products/productsellerservice.dart';
 
 import '../../../models/Product.dart';
 import '../../../utils/constants.dart';
@@ -28,18 +29,20 @@ class _ProductImagesState extends State<ProductImages> {
             aspectRatio: 1,
             child: Hero(
               tag: widget.product.id.toString(),
-              child: Image.asset(widget.product.images[selectedImage]),
+              //child: Image.asset(widget.product.images[selectedImage]),
+              child: Image.network(widget.product.image),
             ),
           ),
         ),
         // SizedBox(height: getProportionateScreenWidth(20)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ...List.generate(widget.product.images.length,
-                (index) => buildSmallProductPreview(index)),
-          ],
-        )
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     Image.network(widget.product.image),
+        //     // ...List.generate(widget.product.images.length,
+        //     //     (index) => buildSmallProductPreview(index)),
+        //   ],
+        // )
       ],
     );
   }
