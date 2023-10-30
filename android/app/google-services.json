@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "822910198054",
+    "project_id": "takaconnectauth",
+    "storage_bucket": "takaconnectauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822910198054:android:f898e2aa227b200e35a1e7",
+        "android_client_info": {
+          "package_name": "codespynner.io.takaconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk1D75Dbi8poRuLQIaLNlyj2ezGFvCw0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822910198054:android:9c86eb900a38ac9e35a1e7",
+        "android_client_info": {
+          "package_name": "com.example.phoneauth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk1D75Dbi8poRuLQIaLNlyj2ezGFvCw0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
