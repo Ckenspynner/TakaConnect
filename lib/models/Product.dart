@@ -28,7 +28,7 @@
 // }
 //
 // // Our demo Products
-//
+
 // List<Product> demoProducts = [
 //   Product(
 //     id: 1,

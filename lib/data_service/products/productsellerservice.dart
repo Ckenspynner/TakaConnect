@@ -18,8 +18,8 @@ class ProductSellersService {
     var response = await http.get(Uri.parse(tanariverproductsellersUrl));
     //print(jsonDecode(response.body));
     return ListOfTanaRiverProductSellers.fromJson(jsonDecode(response.body));
-
   } ///////////////////////////////////////////////////////////////-------------Lamu
+
   Future<ListOfLamuProductSellers> getLamuProductSellers() async {
     var response = await http.get(Uri.parse(lamuproductsellersUrl));
     //print(jsonDecode(response.body));
@@ -98,7 +98,6 @@ class ListOfKilifiProductSellers {
     return ListOfKilifiProductSellers(productSellers: _productSellers);
   }
 }
-
 
 ///////////////////////////////////////////////////////////////-------------Lamu
 class ListOfLamuProductSellers {
@@ -221,10 +220,7 @@ List<Product> demoCategories = [
   Product(
     id: 1,
     images: [
-      "assets/images/wood.png",
-      "assets/images/wood1.png",
-      "assets/images/wood2.png",
-      //"assets/images/ps4_console_white_4.png",
+      "assets/images/organicsicon.png",
     ],
     colors: [
       Color(0xFFF6625E),
@@ -244,6 +240,209 @@ List<Product> demoCategories = [
     county: 'Kisauni',
     phone: '0710234567',
     image: '',
+    seller: 'Chrispine Odhiambo',
+    contact: '',
+    category: '',
+    categorytype: '',
+    itemcolor: '',
+  ),
+  Product(
+    id: 2,
+    images: [
+      "assets/images/metal1.png",
+    ],
+    colors: [
+      Color(0xFFF6625E),
+      Color(0xFF836DB8),
+      Color(0xFFDECB9C),
+      Colors.white,
+    ],
+    title: "Metal",
+    price: 64.99,
+    description: description,
+    rating: 4.8,
+    isFavourite: true,
+    isPopular: true,
+    materialType: 'Saw Dust',
+    quantity: 10,
+    location: 'Mombasa',
+    county: 'Kisauni',
+    phone: '0710234567',
+    image: '',
+    seller: 'Purity Chepkemboi',
+    contact: '',
+    category: '',
+    categorytype: '',
+    itemcolor: '',
+  ),
+  Product(
+    id: 3,
+    images: [
+      "assets/images/plastics1.png",
+    ],
+    colors: [
+      Color(0xFFF6625E),
+      Color(0xFF836DB8),
+      Color(0xFFDECB9C),
+      Colors.white,
+    ],
+    title: "Plastics",
+    price: 64.99,
+    description: description,
+    rating: 4.8,
+    isFavourite: true,
+    isPopular: true,
+    materialType: 'Saw Dust',
+    quantity: 45,
+    location: 'Mombasa',
+    county: 'Kisauni',
+    phone: '0710234567',
+    image: '',
+    seller: 'Kenneth Otieno',
+    contact: '',
+    category: '',
+    categorytype: '',
+    itemcolor: '',
+  ),
+  Product(
+    id: 4,
+    images: [
+      "assets/images/broken1.png",
+    ],
+    colors: [
+      Color(0xFFF6625E),
+      Color(0xFF836DB8),
+      Color(0xFFDECB9C),
+      Colors.white,
+    ],
+    title: "Glass",
+    price: 64.99,
+    description: description,
+    rating: 4.8,
+    isFavourite: true,
+    isPopular: true,
+    materialType: 'Saw Dust',
+    quantity: 67,
+    location: 'Mombasa',
+    county: 'Kisauni',
+    phone: '0710234567',
+    image: '',
+    seller: 'Catherine Mwalugha',
+    contact: '',
+    category: '',
+    categorytype: '',
+    itemcolor: '',
+  ),
+  Product(
+    id: 5,
+    images: [
+      "assets/images/clothingicon.png",
+    ],
+    colors: [
+      Color(0xFFF6625E),
+      Color(0xFF836DB8),
+      Color(0xFFDECB9C),
+      Colors.white,
+    ],
+    title: "Clothes",
+    price: 64.99,
+    description: description,
+    rating: 4.8,
+    isFavourite: true,
+    isPopular: true,
+    materialType: 'Saw Dust',
+    quantity: 34,
+    location: 'Mombasa',
+    county: 'Kisauni',
+    phone: '0710234567',
+    image: '',
+    seller: 'Mary Chipatis',
+    contact: '',
+    category: '',
+    categorytype: '',
+    itemcolor: '',
+  ),
+  Product(
+    id: 6,
+    images: [
+      "assets/images/electronics.png",
+    ],
+    colors: [
+      Color(0xFFF6625E),
+      Color(0xFF836DB8),
+      Color(0xFFDECB9C),
+      Colors.white,
+    ],
+    title: "E_waste",
+    price: 64.99,
+    description: description,
+    rating: 4.8,
+    isFavourite: true,
+    isPopular: true,
+    materialType: 'Saw Dust',
+    quantity: 43,
+    location: 'Mombasa',
+    county: 'Kisauni',
+    phone: '0710234567',
+    image: '',
+    seller: 'Maureen Kombo',
+    contact: '',
+    category: '',
+    categorytype: '',
+    itemcolor: '',
+  ),
+  Product(
+    id: 7,
+    images: [
+      "assets/images/papericon.png",
+    ],
+    colors: [
+      Color(0xFFF6625E),
+      Color(0xFF836DB8),
+      Color(0xFFDECB9C),
+      Colors.white,
+    ],
+    title: "Paper",
+    price: 64.99,
+    description: description,
+    rating: 4.8,
+    isFavourite: true,
+    isPopular: true,
+    materialType: 'Saw Dust',
+    quantity: 32,
+    location: 'Mombasa',
+    county: 'Kisauni',
+    phone: '0710234567',
+    image: '',
+    seller: '',
+    contact: '',
+    category: '',
+    categorytype: '',
+    itemcolor: '',
+  ),
+  Product(
+    id: 8,
+    images: [
+      "assets/images/flipflop.png",
+    ],
+    colors: [
+      Color(0xFFF6625E),
+      Color(0xFF836DB8),
+      Color(0xFFDECB9C),
+      Colors.white,
+    ],
+    title: "Rubber",
+    price: 64.99,
+    description: description,
+    rating: 4.8,
+    isFavourite: true,
+    isPopular: true,
+    materialType: 'Saw Dust',
+    quantity: 34,
+    location: 'Mombasa',
+    county: 'Kisauni',
+    phone: '0710234567',
+    image: '',
     seller: '',
     contact: '',
     category: '',
@@ -255,30 +454,26 @@ List<Product> demoCategories = [
 const String description =
     "This section will contain details description of the product …";
 
-// Product(
-// id: 1,
-// images: [
-// "assets/images/wood.png",
-// "assets/images/wood1.png",
-// "assets/images/wood2.png",
-// //"assets/images/ps4_console_white_4.png",
-// ],
-// colors: [
-// Color(0xFFF6625E),
-// Color(0xFF836DB8),
-// Color(0xFFDECB9C),
-// Colors.white,
-// ],
-// title: "Organics",
-// price: 64.99,
-// description: description,
-// rating: 4.8,
-// isFavourite: true,
-// isPopular: true,
-// materialType: 'Saw Dust',
-// color: 'Brown',
-// quantity: '20',
-// location: 'Mombasa',
-// county: 'Kisauni',
-// phone: '0710234567',
-// ),
+
+// import 'package:takaconnect/data_service/products/productsellerservice.dart';
+//
+// import 'Product.dart';
+//
+// class Cart {
+//   final Product product;
+//   final int numOfItem;
+//
+//   Cart({required this.product, required this.numOfItem});
+// }
+//
+// // Demo data for our cart
+//
+// List<Cart> demoCarts = [
+//   Cart(product: demoCategories[0], numOfItem: 2),
+//   Cart(product: demoCategories[1], numOfItem: 1),
+//   Cart(product: demoCategories[2], numOfItem: 1),
+//   Cart(product: demoCategories[3], numOfItem: 1),
+//   Cart(product: demoCategories[4], numOfItem: 1),
+//   Cart(product: demoCategories[5], numOfItem: 1),
+// ];
+

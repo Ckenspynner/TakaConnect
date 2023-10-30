@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:takaconnect/screens/product_sellers/components/SellerHeader.dart';
 import 'package:takaconnect/screens/product_sellers/components/popular_sellers.dart';
-import 'package:takaconnect/utils/size_config.dart';
 
 
 class Body extends StatelessWidget {
@@ -32,3 +30,5 @@ class Body extends StatelessWidget {
 // I/flutter (10016): Metals,Heavy,Bamburi
 // I/flutter (10016): Plastics,PET,Nyali
 // I/flutter (10016): Glass,Broken Glass,Mkomani
+
+

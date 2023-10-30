@@ -1,16 +1,46 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:takaconnect/main.dart';
+import 'package:takaconnect/utils/http_strings.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/size_config.dart';
+import 'package:http/http.dart' as http;
 
 class OrderDetails extends StatefulWidget {
-
+  final String imageurl;
+  final String productname;
+  final String buyername;
+  final String buyercontact;
+  final String buyerlocation;
+  final String buyercounty;
+  final int quantity;
+  final int sellerid;
+  final String sellername;
   final String sellerContact;
+  final String sellerlocation;
+  final String orderstatus;
+
   final String categorytype;
   final String category;
+  final String customerAccount;
+
   const OrderDetails({
-    Key? key, required this.sellerContact, required this.categorytype, required this.category,
+    Key? key,
+    required this.sellerContact,
+    required this.categorytype,
+    required this.category,
+    required this.buyercontact,
+    required this.buyerlocation,
+    required this.quantity,
+    required this.sellername,
+    required this.sellerlocation,
+    required this.orderstatus,
+    required this.imageurl,
+    required this.productname,
+    required this.buyername,
+    required this.sellerid,
+    required this.customerAccount, required this.buyercounty,
   }) : super(key: key);
 
   @override
@@ -21,16 +51,135 @@ class _OrderDetailsState extends State<OrderDetails> {
   bool _show_order_panel = false;
   String chatText = 'Chat', orderText = 'Order';
   final _dropdownFormKey = GlobalKey<FormState>();
+  var controllerQuantity = TextEditingController();
 
   int random(int min, int max) {
     return min + Random().nextInt(max - min);
   }
 
+
+  placeOrder(token, id, image, productname, buyer, buyercontact, buyerlocation,
+      quantity, seller, sellercontact, sellerlocation, orderstatus) async {
+    var path;
+
+    if (widget.buyercounty == 'Mombasa') {
+      //works
+      path = widget.customerAccount == 'Buyer'?createmombasaBuyerUrl:createmombasaRecyclerUrl;
+    }
+    if (widget.buyercounty == 'Lamu') {
+      //works
+      path = widget.customerAccount == 'Buyer'?createlamuBuyerUrl:createlamuRecyclerUrl;
+    }
+    if (widget.buyercounty == 'Kwale') {
+      //works
+      path = widget.customerAccount == 'Buyer'?createkwaleBuyerUrl:createkwaleRecyclerUrl;
+    }
+    if (widget.buyercounty == 'Kilifi') {
+      //works
+      path = widget.customerAccount == 'Buyer'?createkilifiBuyerUrl:createkilifiRecyclerUrl;
+    }
+    if (widget.buyercounty == 'Tana River') {
+      //works
+      path = widget.customerAccount == 'Buyer'?createtanariverBuyerUrl:createtanariverRecyclerUrl;
+    }
+    if (widget.buyercounty == 'Taita Taveta') {
+      //works
+      path = widget.customerAccount == 'Buyer'?createtaitatavetaBuyerUrl:createtaitatavetaRecyclerUrl;
+    }
+
+    // print(path);
+    // print(widget.buyercounty);
+    // print(buyerlocation);
+    var uri = Uri.parse(path);
+
+    ///--------------------create mombasa produce seller
+    Map data = {
+      'image': '$image',
+      'id': '$id',
+      'productname': '$productname',
+      widget.customerAccount == 'Buyer'?'buyer':'recycler': '$buyer',
+      widget.customerAccount == 'Buyer'?'buyercontact':'recyclercontact': '$buyercontact',
+      widget.customerAccount == 'Buyer'?'buyerlocation':'recyclerlocation': '$buyerlocation',
+      'quantity': '$quantity',
+      'seller': '$seller',
+      'sellercontact': '$sellercontact',
+      'sellerlocation': '$sellerlocation',
+      'orderstatus': '$orderstatus',
+    };
+    
+    
+
+    var response = await http.post(uri, body: data, headers: {
+      'Authorization': ' Token $token',
+    });
+    // print(response.body.length);
+    // if (error != null) {
+    //   Get.showSnackbar(GetSnackBar(message: error.toString(),));
+    // }
+
+    if (response.statusCode == 200) {
+      final snackBar = SnackBar(
+        backgroundColor: Colors.green,
+        content: const Text('Ordered Successfully'),
+        action: SnackBarAction(
+          textColor: Colors.white,
+          label: 'Undo',
+          onPressed: () {
+            // Some code to undo the change.
+          },
+        ),
+      );
+
+      // Find the ScaffoldMessenger in the widget tree
+      // and use it to show a SnackBar.
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      final snackBar = SnackBar(
+        backgroundColor: Colors.redAccent,
+        content: const Text('Order Unsuccessfully'),
+        action: SnackBarAction(
+          textColor: Colors.white,
+          label: 'Undo',
+          onPressed: () {
+            // Some code to undo the change.
+          },
+        ),
+      );
+
+      // Find the ScaffoldMessenger in the widget tree
+      // and use it to show a SnackBar.
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    //print(widget.customerAccount);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Center(
+        // child: ElevatedButton(
+        // onPressed: () {
+        //   final snackBar = SnackBar(
+        //     backgroundColor: Colors.green,
+        //     content: const Text('Ordered Successfully'),
+        //     action: SnackBarAction(
+        //       textColor: Colors.white,
+        //       label: 'Undo',
+        //       onPressed: () {
+        //         // Some code to undo the change.
+        //       },
+        //     ),
+        //   );
+        //
+        //   // Find the ScaffoldMessenger in the widget tree
+        //   // and use it to show a SnackBar.
+        //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        // },
+        // child: const Text('Show SnackBar'),
+        // ),
+        // ),
         Visibility(
           visible: _show_order_panel,
           maintainAnimation: true,
@@ -46,7 +195,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 child: Column(
                   children: [
                     TextFormField(
-                      //controller: controllerCounts,
+                      controller: controllerQuantity,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: 'Enter Quantity',
@@ -148,6 +297,20 @@ class _OrderDetailsState extends State<OrderDetails> {
                           _show_order_panel = !_show_order_panel;
                           chatText = 'Chat';
                           orderText = 'Order';
+
+                          placeOrder(
+                              '428086bf6b4d116807f29f130788e3401c2b8377',
+                              widget.sellerid,
+                              widget.imageurl,
+                              widget.productname,
+                              widget.buyername,
+                              widget.buyercontact,
+                              widget.buyerlocation,
+                              controllerQuantity.text,
+                              widget.sellername,
+                              widget.sellerContact,
+                              widget.sellerlocation,
+                              widget.orderstatus);
                         }
                       }
                     });

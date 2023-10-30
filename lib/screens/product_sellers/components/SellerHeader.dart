@@ -16,7 +16,7 @@ class SellerHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SearchField(),
+          const SearchField(firstname: '', accounttype: '',),
           IconBtnWithCounter(
             svgSrc: "assets/icons/Cart Icon.svg",
             press: () => Navigator.pushNamed(context, CartScreen.routeName),

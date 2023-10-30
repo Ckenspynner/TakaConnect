@@ -50,7 +50,7 @@ class CheckoutCard extends StatelessWidget {
                   child: SvgPicture.asset("assets/icons/receipt.svg"),
                 ),
                 Spacer(),
-                Text("Add voucher code"),
+                const Text("Add voucher code"),
                 const SizedBox(width: 10),
                 Icon(
                   Icons.arrow_forward_ios,
@@ -63,7 +63,7 @@ class CheckoutCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text.rich(
+                const Text.rich(
                   TextSpan(
                     text: "Total:\n",
                     children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takaconnect/firebase_repository/controller/signup_controller.dart';
 
 import '../../../utils/constants.dart';
 import '../../../utils/size_config.dart';
@@ -22,13 +23,15 @@ class Body extends StatelessWidget {
                 "OTP Verification",
                 style: headingStyle,
               ),
-              Text("We sent your code to ${arguments['otpPhoneNumber'].substring(0,6)}**** "),
+              Text("We sent your code to ${arguments['otpPhoneNumber'].substring(0,9)}**** "),
               buildTimer(),
               const OtpForm(),
               SizedBox(height: SizeConfig.screenHeight * 0.1),
               GestureDetector(
                 onTap: () {
                   // OTP code resend
+                  SignupController.instance.phoneAuthentication(arguments['otpPhoneNumber'].trim());
+                  buildTimer();
                 },
                 child: const Text(
                   "Resend OTP Code",
@@ -48,8 +51,8 @@ class Body extends StatelessWidget {
       children: [
         const Text("This code will expired in "),
         TweenAnimationBuilder(
-          tween: Tween(begin: 30.0, end: 0.0),
-          duration: const Duration(seconds: 30),
+          tween: Tween(begin: 60.0, end: 0.0),
+          duration: const Duration(seconds: 60),
           builder: (_, dynamic value, child) => Text(
             "00:${value.toInt()}",
             style: const TextStyle(color: kPrimaryColor),

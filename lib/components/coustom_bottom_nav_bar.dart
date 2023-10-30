@@ -7,11 +7,27 @@ import 'package:takaconnect/screens/profile/profile_screen.dart';
 import '../utils/constants.dart';
 import '../utils/enums.dart';
 
-
 class CustomBottomNavBar extends StatelessWidget {
+  final String id;
+  final String firstname;
+  final String lastname;
+  final String contact;
+  final String accounttype;
+  final String county;
+  final String subcounty;
+  final String gender;
+
   const CustomBottomNavBar({
     Key? key,
     required this.selectedMenu,
+    required this.id,
+    required this.firstname,
+    required this.lastname,
+    required this.contact,
+    required this.accounttype,
+    required this.county,
+    required this.subcounty,
+    required this.gender,
   }) : super(key: key);
 
   final MenuState selectedMenu;
@@ -48,7 +64,17 @@ class CustomBottomNavBar extends StatelessWidget {
                       : inActiveIconColor,
                 ),
                 onPressed: () =>
-                    Navigator.pushNamed(context, HomeScreen.routeName),
+                    Navigator.pushNamed(context, HomeScreen.routeName,
+                      arguments: {
+                        'id': id,
+                        'firstname': firstname,
+                        'lastname': lastname,
+                        'contact': contact,
+                        'accounttype': accounttype,
+                        'county': county,
+                        'subcounty': subcounty,
+                        'gender': gender
+                      },),
               ),
               // IconButton(
               //   icon: SvgPicture.asset("assets/icons/Heart Icon.svg"),
@@ -66,7 +92,13 @@ class CustomBottomNavBar extends StatelessWidget {
                       : inActiveIconColor,
                 ),
                 onPressed: () =>
-                    Navigator.pushNamed(context, CartScreen.routeName),
+                    Navigator.pushNamed(context, CartScreen.routeName,
+                      arguments: {
+                        'contact': contact,
+                        'county': county,
+                        'subcounty': subcounty,
+                        'accounttype': accounttype,
+                      },),
               ),
               IconButton(
                 icon: SvgPicture.asset(
@@ -75,8 +107,20 @@ class CustomBottomNavBar extends StatelessWidget {
                       ? kPrimaryColor
                       : inActiveIconColor,
                 ),
-                onPressed: () =>
-                    Navigator.pushNamed(context, ProfileScreen.routeName),
+                onPressed: () => Navigator.pushNamed(
+                  context,
+                  ProfileScreen.routeName,
+                  arguments: {
+                    'id': id,
+                    'firstname': firstname,
+                    'lastname': lastname,
+                    'contact': contact,
+                    'accounttype': accounttype,
+                    'county': county,
+                    'subcounty': subcounty,
+                    'gender': gender
+                  },
+                ),
               ),
             ],
           )),

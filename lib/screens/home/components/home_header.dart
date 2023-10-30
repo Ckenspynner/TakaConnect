@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:takaconnect/firebase_repository/authentication_repository/authentication_repository.dart';
+import 'package:takaconnect/screens/sign_in/sign_in_screen.dart';
 import '../../../utils/size_config.dart';
 import '../../cart/cart_screen.dart';
 import 'icon_btn_with_counter.dart';
 import 'search_field.dart';
 
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({
-    Key? key,
-  }) : super(key: key);
+  final String firstname;
+  final String accounttype;
+  final String lastname;
+  final String contact;
+  final String county;
+  final String subcounty;
+  const HomeHeader({Key? key, required this.firstname, required this.accounttype, required this.lastname, required this.contact, required this.county, required this.subcounty}) : super(key: key);
+
+  Future<void> prefrenceLogout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('phoneNumber');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +29,29 @@ class HomeHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SearchField(),
+          SearchField(firstname: firstname,
+            accounttype: accounttype,),
           IconBtnWithCounter(
             svgSrc: "assets/icons/Cart Icon.svg",
-            press: () => Navigator.pushNamed(context, CartScreen.routeName),
+            press: () => Navigator.pushNamed(context, CartScreen.routeName,
+              arguments: {
+                'contact': contact,
+                'county': county,
+                'subcounty': subcounty,
+                'accounttype': accounttype,
+              },),
           ),
           IconBtnWithCounter(
-            svgSrc: "assets/icons/Bell.svg",
-            numOfitem: 3,
-            press: () {},
+            //svgSrc: "assets/icons/Bell.svg",
+            svgSrc: "assets/icons/logout.svg",
+            //numOfitem: 3,
+            press: () async {
+              //AuthenticationRepository.instance.logout();
+              //Navigator.pushNamedAndRemoveUntil(context, SignInScreen.routeName);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil(SignInScreen.routeName, (Route<dynamic> route) => false);
+              prefrenceLogout();
+            },
           ),
         ],
       ),

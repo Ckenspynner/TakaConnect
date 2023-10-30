@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../components/custom_surfix_icon.dart';
 import '../../../components/default_button.dart';
-import '../../../components/form_error.dart';
-import '../../../utils/constants.dart';
-import '../../../utils/size_config.dart';
 import '../../complete_profile/complete_profile_screen.dart';
-
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -15,26 +10,168 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
-  String? email;
-  String? password;
-  String? conform_password;
-  bool remember = false;
-  final List<String?> errors = [];
 
-  void addError({String? error}) {
-    if (!errors.contains(error))
-      setState(() {
-        errors.add(error);
-      });
+  String selectedValue1 = "Select Acount Type";
+  String selectedValue2 = "Select Your County";
+  String selectedValue3 = "Select Your Sub-County";
+  String selectedValue4 = "Select Your Gender";
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownItems1 {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Acount Type", child: Text("Select Acount Type")),
+      const DropdownMenuItem(value: "Seller", child: Text("Seller")),
+      const DropdownMenuItem(value: "Buyer", child: Text("Buyer")),
+      const DropdownMenuItem(value: "Recycler", child: Text("Recycler")),
+    ];
+    return menuItems;
   }
 
-  void removeError({String? error}) {
-    if (errors.contains(error)) {
-      setState(() {
-        errors.remove(error);
-      });
-    }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownItems2 {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your County", child: Text("Select Your County")),
+      const DropdownMenuItem(
+          value: "Taita Taveta", child: Text("Taita Taveta")),
+      const DropdownMenuItem(value: "Tana River", child: Text("Tana River")),
+      const DropdownMenuItem(value: "Mombasa", child: Text("Mombasa")),
+      const DropdownMenuItem(value: "Kwale", child: Text("Kwale")),
+      const DropdownMenuItem(value: "Kilifi", child: Text("Kilifi")),
+      const DropdownMenuItem(value: "Lamu", child: Text("Lamu")),
+    ];
+    return menuItems;
   }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownItems3 {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(
+          value: "All Sub-County", child: Text("All Sub-County")),
+      const DropdownMenuItem(value: "Changamwe", child: Text("Changamwe")),
+      const DropdownMenuItem(value: "Kisauni", child: Text("Kisauni")),
+      const DropdownMenuItem(value: "Likoni", child: Text("Likoni")),
+      const DropdownMenuItem(value: "Jomvu", child: Text("Jomvu")),
+      const DropdownMenuItem(value: "Mvita", child: Text("Mvita")),
+      const DropdownMenuItem(value: "Nyali", child: Text("Nyali")),
+    ];
+    return menuItems;
+  }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownItems4 {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Gender", child: Text("Select Your Gender")),
+      const DropdownMenuItem(value: "Male", child: Text("Male")),
+      const DropdownMenuItem(value: "Female", child: Text("Female")),
+    ];
+    return menuItems;
+  }
+
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownKilifi {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(
+          value: "Kilifi North", child: Text("Kilifi North")),
+      const DropdownMenuItem(
+          value: "Kilifi South", child: Text("Kilifi South")),
+      const DropdownMenuItem(value: "Magarini", child: Text("Magarini")),
+      const DropdownMenuItem(value: "Kaloleni", child: Text("Kaloleni")),
+      const DropdownMenuItem(value: "Malindi", child: Text("Malindi")),
+      const DropdownMenuItem(value: "Ganze", child: Text("Ganze")),
+      const DropdownMenuItem(value: "Rabai", child: Text("Rabai")),
+    ];
+    return menuItems;
+  }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownKwale {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(value: "Lunga Lunga", child: Text("Lunga Lunga")),
+      const DropdownMenuItem(value: "Msambweni", child: Text("Msambweni")),
+      const DropdownMenuItem(value: "Kinango", child: Text("Kinango")),
+      const DropdownMenuItem(value: "Matunga", child: Text("Matunga")),
+    ];
+    return menuItems;
+  }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownTanaRiver {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(value: "Garsen", child: Text("Garsen")),
+      const DropdownMenuItem(value: "Galole", child: Text("Galole")),
+      const DropdownMenuItem(value: "Bura", child: Text("Bura")),
+    ];
+    return menuItems;
+  }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownTaitaTaveta {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(value: "Wundanyi", child: Text("Wundanyi")),
+      const DropdownMenuItem(value: "Mwatate", child: Text("Mwatate")),
+      const DropdownMenuItem(value: "Taveta", child: Text("Taveta")),
+      const DropdownMenuItem(value: "Voi", child: Text("Voi")),
+    ];
+    return menuItems;
+  }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownMombasa {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(value: "Changamwe", child: Text("Changamwe")),
+      const DropdownMenuItem(value: "Kisauni", child: Text("Kisauni")),
+      const DropdownMenuItem(value: "Likoni", child: Text("Likoni")),
+      const DropdownMenuItem(value: "Jomvu", child: Text("Jomvu")),
+      const DropdownMenuItem(value: "Mvita", child: Text("Mvita")),
+      const DropdownMenuItem(value: "Nyali", child: Text("Nyali")),
+    ];
+    return menuItems;
+  }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownLamu {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(value: "Lamu East", child: Text("Lamu East")),
+      const DropdownMenuItem(value: "Lamu West", child: Text("Lamu West")),
+    ];
+    return menuItems;
+  }
+
+  List<DropdownMenuItem<String>> get dropdownNull2 {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+    ];
+    return menuItems;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,20 +179,154 @@ class _SignUpFormState extends State<SignUpForm> {
       key: _formKey,
       child: Column(
         children: [
-          buildEmailFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
-          buildPasswordFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
-          buildConformPassFormField(),
-          FormError(errors: errors),
-          SizedBox(height: getProportionateScreenHeight(40)),
+          DropdownButtonFormField(
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color(0xFFC4DFB4), width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                border: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color(0xFFC4DFB4), width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                filled: true,
+                fillColor: Colors.transparent,
+              ),
+              validator: (value) =>
+                  value == "Select Acount Type" ? "Select Acount Type" : null,
+              //dropdownColor: Colors.blueAccent,
+              value: selectedValue1,
+              icon: const Icon(Icons.keyboard_arrow_down),
+              onChanged: (String? newValue) {
+                setState(() {
+                  selectedValue1 = newValue!;
+                });
+              },
+              items: dropdownItems1),
+          const SizedBox(
+            height: 30,
+          ),
+
+          DropdownButtonFormField(
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color(0xFFC4DFB4), width: 2),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              border: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color(0xFFC4DFB4), width: 2),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              filled: true,
+              fillColor: Colors.transparent,
+            ),
+            validator: (value) =>
+                value == "Select Your County" ? "Select Your County" : null,
+            //dropdownColor: Colors.blueAccent,
+            value: selectedValue2,
+            icon: const Icon(Icons.keyboard_arrow_down),
+            onChanged: (String? newValue) {
+              setState(() {
+                selectedValue2 = newValue!;
+                selectedValue3 = "Select Your Sub-County";
+              });
+            },
+            items: dropdownItems2,
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          DropdownButtonFormField(
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color(0xFFC4DFB4), width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                border: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color(0xFFC4DFB4), width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                filled: true,
+                fillColor: Colors.transparent,
+              ),
+              validator: (value) => value == "Select Your Sub-County"
+                  ? "Select Your Sub-County"
+                  : null,
+              //dropdownColor: Colors.blueAccent,
+              value: selectedValue3,
+              icon: const Icon(Icons.keyboard_arrow_down),
+              onChanged: (String? newValue) {
+                setState(() {
+                  selectedValue3 = newValue!;
+                });
+              },
+              items: selectedValue2 == 'Kilifi'
+                  ? dropdownKilifi
+                  : selectedValue2 == 'Kwale'
+                      ? dropdownKwale
+                      : selectedValue2 == 'Mombasa'
+                          ? dropdownMombasa
+                          : selectedValue2 == 'Lamu'
+                              ? dropdownLamu
+                              : selectedValue2 == 'Tana River'
+                                  ? dropdownTanaRiver
+                                  : selectedValue2 == 'Taita Taveta'
+                                      ? dropdownTaitaTaveta
+                                      : dropdownNull2),
+          const SizedBox(
+            height: 30,
+          ),
+          DropdownButtonFormField(
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                  const BorderSide(color: Color(0xFFC4DFB4), width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                border: OutlineInputBorder(
+                  borderSide:
+                  const BorderSide(color: Color(0xFFC4DFB4), width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                filled: true,
+                fillColor: Colors.transparent,
+              ),
+              validator: (value) =>
+              value == "Select Your Gender" ? "Select Your Gender" : null,
+              //dropdownColor: Colors.blueAccent,
+              value: selectedValue4,
+              icon: const Icon(Icons.keyboard_arrow_down),
+              onChanged: (String? newValue) {
+                setState(() {
+                  selectedValue4 = newValue!;
+                });
+              },
+              items: dropdownItems4),
+          const SizedBox(
+            height: 30,
+          ),
           DefaultButton(
             text: "Continue",
             press: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
-                Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+                Navigator.pushNamed(
+                  context,
+                  CompleteProfileScreen.routeName,
+                  arguments: {
+                    'accounttype': selectedValue1,
+                    'county': selectedValue2,
+                    'subcounty': selectedValue3,
+                    'gender': selectedValue4,
+                  },
+                );
               }
             },
           ),
@@ -64,102 +335,4 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  TextFormField buildConformPassFormField() {
-    return TextFormField(
-      obscureText: true,
-      onSaved: (newValue) => conform_password = newValue,
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
-        } else if (value.isNotEmpty && password == conform_password) {
-          removeError(error: kMatchPassError);
-        }
-        conform_password = value;
-      },
-      validator: (value) {
-        if (value!.isEmpty) {
-          addError(error: kPassNullError);
-          return "";
-        } else if ((password != value)) {
-          addError(error: kMatchPassError);
-          return "";
-        }
-        return null;
-      },
-      decoration: const InputDecoration(
-        labelText: "Confirm Password",
-        hintText: "Re-enter your password",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
-      ),
-    );
-  }
-
-  TextFormField buildPasswordFormField() {
-    return TextFormField(
-      obscureText: true,
-      onSaved: (newValue) => password = newValue,
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
-        } else if (value.length >= 8) {
-          removeError(error: kShortPassError);
-        }
-        password = value;
-      },
-      validator: (value) {
-        if (value!.isEmpty) {
-          addError(error: kPassNullError);
-          return "";
-        } else if (value.length < 8) {
-          addError(error: kShortPassError);
-          return "";
-        }
-        return null;
-      },
-      decoration: const InputDecoration(
-        labelText: "Password",
-        hintText: "Enter your password",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
-      ),
-    );
-  }
-
-  TextFormField buildEmailFormField() {
-    return TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      onSaved: (newValue) => email = newValue,
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
-        } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
-        }
-        return null;
-      },
-      validator: (value) {
-        if (value!.isEmpty) {
-          addError(error: kEmailNullError);
-          return "";
-        } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-          return "";
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        labelText: "Email",
-        hintText: "Enter your email",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
-      ),
-    );
-  }
 }

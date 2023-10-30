@@ -50,9 +50,11 @@ class _WastePlayerMapState extends State<WastePlayerMap> {
           child: const Text('Waste Players Interactive Map',),//SectionTitle(title: "Waste Players Map", press: () {}),
         ),
 
-        SizedBox(
-          height: MediaQuery.of(context).size.height*0.8,
-          child: WebViewWidget(controller: controller),
+        SingleChildScrollView(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height*0.8,
+            child: WebViewWidget(controller: controller),
+          ),
         ),
       ],
     );

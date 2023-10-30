@@ -6,8 +6,21 @@ import '../../../utils/size_config.dart';
 import 'section_title.dart';
 
 class SpecialOffers extends StatelessWidget {
+  final String accounttype;
+  final String lastname;
+  final String firstname;
+  final String county;
+  final String subcounty;
+  final String contact;
+
   const SpecialOffers({
     Key? key,
+    required this.accounttype,
+    required this.lastname,
+    required this.county,
+    required this.subcounty,
+    required this.contact,
+    required this.firstname,
   }) : super(key: key);
 
   @override
@@ -20,6 +33,7 @@ class SpecialOffers extends StatelessWidget {
           child: SectionTitle(
             title: "Product Management",
             press: () {},
+            account: '',
           ),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
@@ -33,7 +47,20 @@ class SpecialOffers extends StatelessWidget {
                 category: "See Your Products",
                 numOfBrands: 18,
                 press: () {
-                  Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': 'Your Products'},);
+                  Navigator.pushNamed(
+                    context,
+                    SellerScreen.routeName,
+                    arguments: {
+                      'barTitle': 'Your Products',
+                      'sortKey': 'hometosellerproductslist',
+                      'firstname': firstname,
+                      'lastname': lastname,
+                      'contact': contact,
+                      'accounttype': accounttype,
+                      'county': county,
+                      'subcounty': subcounty,
+                    },
+                  );
                 },
               ),
               SpecialOfferCard(
@@ -42,7 +69,19 @@ class SpecialOffers extends StatelessWidget {
                 category: "Add Products",
                 //numOfBrands: 24,
                 press: () {
-                  Navigator.pushNamed(context, AddProductScreen.routeName,arguments: {'barTitle': 'Add Products'},);
+                  Navigator.pushNamed(
+                    context,
+                    AddProductScreen.routeName,
+                    arguments: {
+                      'barTitle': 'Add Products',
+                      'firstname': firstname,
+                      'lastname': lastname,
+                      'contact': contact,
+                      'accounttype': accounttype,
+                      'county': county,
+                      'subcounty': subcounty,
+                    },
+                  );
                 },
               ),
               SizedBox(width: getProportionateScreenWidth(20)),
@@ -123,11 +162,24 @@ class SpecialOfferCard extends StatelessWidget {
                 Positioned.fill(
                   child: Align(
                     alignment: Alignment.bottomRight,
-                    child: numOfBrands != null? null: IconBtnWithCounter(
-                      svgSrc: "assets/icons/add.svg",
-                      //numOfitem: 3,
-                      press: () {Navigator.pushNamed(context, AddProductScreen.routeName,arguments: {'barTitle': 'Add Products'},);},
-                    ),
+                    child: numOfBrands != null
+                        ? null
+                        : IconBtnWithCounter(
+                            svgSrc: "assets/icons/add.svg",
+                            //numOfitem: 3,
+                            press: () {
+                              // Navigator.pushNamed(
+                              //   context,
+                              //   AddProductScreen.routeName,
+                              //   arguments: {'barTitle': 'Add Products','firstname': firstname,
+                              //     'lastname': lastname,
+                              //     'contact': contact,
+                              //     'accounttype': accounttype,
+                              //     'county': county,
+                              //     'subcounty': subcounty,},
+                              // );
+                            },
+                          ),
                     // Container(
                     //   color: Colors.greenAccent,
                     //   child: IconBtnWithCounter(

@@ -7,16 +7,49 @@ import '../../../utils/size_config.dart';
 import 'section_title.dart';
 
 class PopularProducts extends StatelessWidget {
-  const PopularProducts({super.key});
+  final String customerAccount;
+  final String accounttype;
+  final String lastname;
+  final String firstname;
+  final String county;
+  final String subcounty;
+  final String contact;
+
+  const PopularProducts(
+      {super.key,
+      required this.customerAccount,
+      required this.accounttype,
+      required this.lastname,
+      required this.firstname,
+      required this.county,
+      required this.subcounty,
+      required this.contact});
 
   @override
   Widget build(BuildContext context) {
+    //print(customerAccount);
     return Column(
       children: [
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: SectionTitle(title: "Categories", press: () {Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': 'Product List'},);}),
+          child: SectionTitle(
+              title: "Categories",
+              account: customerAccount,
+              press: () {
+                Navigator.pushNamed(context, SellerScreen.routeName,
+                    arguments: {
+                      'barTitle': 'Product List',
+                      'customerAccount': customerAccount,
+                      'sortKey': 'hometoallproductslist',
+                      'firstname': firstname,
+                      'lastname': lastname,
+                      'contact': contact,
+                      'accounttype': accounttype,
+                      'county': county,
+                      'subcounty': subcounty,
+                    });
+              }),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(
@@ -26,12 +59,12 @@ class PopularProducts extends StatelessWidget {
               ...List.generate(
                 demoCategories.length,
                 (index) {
-
                   if (demoCategories[index].isPopular) {
                     return ProductCard(product: demoCategories[index]);
                   }
 
-                  return const SizedBox.shrink(); // here by default width and height is 0
+                  return const SizedBox
+                      .shrink(); // here by default width and height is 0
                 },
               ),
               SizedBox(width: getProportionateScreenWidth(20)),

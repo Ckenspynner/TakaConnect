@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:takaconnect/data_service/products/productsellerservice.dart';
 import 'package:takaconnect/screens/product_sellers/sellers.dart';
@@ -7,7 +8,7 @@ import 'package:takaconnect/utils/http_strings.dart';
 import '../utils/constants.dart';
 import '../utils/size_config.dart';
 
-class SellerProductCard extends StatelessWidget {
+class SellerProductCard extends StatefulWidget {
   SellerProductCard({
     Key? key,
     this.width = 140,
@@ -17,6 +18,13 @@ class SellerProductCard extends StatelessWidget {
 
   final double width, aspectRetio;
   final Product product;
+
+  @override
+  State<SellerProductCard> createState() => _SellerProductCardState();
+}
+
+class _SellerProductCardState extends State<SellerProductCard> {
+
   String sellercounty = 'Taita Taveta';
 
   deleteSellerProduct(token, id) async {
@@ -51,11 +59,46 @@ class SellerProductCard extends StatelessWidget {
     var response = await http.delete(uri, headers: {
       'Authorization': ' Token $token',
     });
-    print(response.body);
+    //print(response.body);
+
+    if (response.statusCode == 200) {
+      final snackBar = SnackBar(
+        backgroundColor: Colors.green,
+        content: const Text('Deleted Successfully'),
+        action: SnackBarAction(
+          textColor: Colors.white,
+          label: 'Undo',
+          onPressed: () {
+            // Some code to undo the change.
+          },
+        ),
+      );
+
+      // Find the ScaffoldMessenger in the widget tree
+      // and use it to show a SnackBar.
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }else{
+      final snackBar = SnackBar(
+        backgroundColor: Colors.redAccent,
+        content: const Text('Delete Unsuccessfully'),
+        action: SnackBarAction(
+          textColor: Colors.white,
+          label: 'Undo',
+          onPressed: () {
+            // Some code to undo the change.
+          },
+        ),
+      );
+
+      // Find the ScaffoldMessenger in the widget tree
+      // and use it to show a SnackBar.
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    //print(product.image);
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: GestureDetector(
@@ -87,7 +130,7 @@ class SellerProductCard extends StatelessWidget {
                       Row(
                         children: [
                           SizedBox(
-                            width: getProportionateScreenWidth(width),
+                            width: getProportionateScreenWidth(widget.width),
                             child: AspectRatio(
                               aspectRatio: 1.02,
                               child: Container(
@@ -98,8 +141,8 @@ class SellerProductCard extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: Hero(
-                                  tag: product.id.toString(),
-                                  child: Image.network(product.image),
+                                  tag: widget.product.id.toString(),
+                                  child: Image.network(widget.product.image),
                                 ),
                               ),
                             ),
@@ -110,19 +153,19 @@ class SellerProductCard extends StatelessWidget {
                             children: [
                               SizedBox(height: getProportionateScreenWidth(10)),
                               Text(
-                                'Category: ${product.category}',
+                                'Category: ${widget.product.category}',
                                 style: const TextStyle(color: Colors.black),
                                 maxLines: 2,
                               ),
                               Text(
-                                'Type: ${product.categorytype}\n',
+                                'Type: ${widget.product.categorytype}\n',
                                 style: const TextStyle(color: Colors.black),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 softWrap: false,
                               ),
                               Text(
-                                "${product.county} - ${product.location}",
+                                "${widget.product.county} - ${widget.product.location}",
                                 //style: const TextStyle(color: Colors.black),
                                 maxLines: 2,
                               ),
@@ -168,7 +211,7 @@ class SellerProductCard extends StatelessWidget {
                                                     //print(product.id);
                                                     deleteSellerProduct(
                                                         '428086bf6b4d116807f29f130788e3401c2b8377',
-                                                        product.id);
+                                                        widget.product.id);
                                                     Navigator.pop(context);
                                                     Navigator.pop(context);
                                                     Navigator.pushNamed(

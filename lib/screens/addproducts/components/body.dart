@@ -5,18 +5,32 @@ import 'package:takaconnect/screens/addproducts/components/add_product_form.dart
 import '../../../utils/size_config.dart';
 import 'top_rounded_container.dart';
 class Body extends StatelessWidget {
-
-  const Body({Key? key,}) : super(key: key);
+  final String firstname;
+  final String accounttype;
+  final String lastname;
+  final String county;
+  final String subcounty;
+  final String contact;
+  const Body({Key? key, required this.firstname, required this.accounttype, required this.lastname, required this.county, required this.subcounty, required this.contact, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // final arguments = (ModalRoute.of(context)?.settings.arguments ??
+    //     <String, dynamic>{}) as Map;
     return ListView(
       children: [
         TopRoundedContainer(
           color: Colors.white,
           child: Column(
             children: [
-              const AddProductDetails(),
+              AddProductDetails(
+                  firstname: firstname,
+                  lastname: lastname,
+                  contact: contact,
+                  accounttype: accounttype,
+                  county: county,
+                  subcounty: subcounty,
+              ),
               TopRoundedContainer(
                 color: const Color(0xFFF6F7F9),
                 child: Column(

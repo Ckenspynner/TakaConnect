@@ -8,11 +8,40 @@ class HomeScreen extends StatelessWidget {
   static String routeName = "/home";
 
   const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Body(),
-      bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.home),
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        body: Body(
+          firstname: arguments['firstname'],
+          lastname: arguments['lastname'],
+          contact: arguments['contact'],
+          county: arguments['county'],
+          subcounty: arguments['subcounty'],
+          accounttype: arguments['accounttype'],
+        ),
+        bottomNavigationBar: CustomBottomNavBar(
+            selectedMenu: MenuState.home,
+            id: '${arguments['id']}',
+            firstname: arguments['firstname'],
+            lastname: arguments['lastname'],
+            contact: arguments['contact'],
+            accounttype: arguments['accounttype'],
+            county: arguments['county'],
+            subcounty: arguments['subcounty'],
+            gender: arguments['gender']
+        ),
+      ),
     );
   }
 }
+// ,arguments: {
+// 'firstname': firstname,
+// 'accounttype': accounttype,
+// },

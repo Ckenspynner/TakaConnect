@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfilePic extends StatelessWidget {
+  final String gender;
   const ProfilePic({
-    Key? key,
+    Key? key, required this.gender,
   }) : super(key: key);
 
   @override
@@ -17,7 +18,7 @@ class ProfilePic extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: Colors.greenAccent.withOpacity(0.2),
-            backgroundImage: AssetImage("assets/images/user.png"),
+            backgroundImage: AssetImage(gender =='Male'?"assets/images/male.png":"assets/images/female.png"),
           ),
           Positioned(
             right: -16,

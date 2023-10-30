@@ -21,3 +21,5 @@ class SplashAnimation extends StatelessWidget {
         backgroundColor: Colors.white);
   }
 }
+
+

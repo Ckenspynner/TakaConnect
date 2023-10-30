@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/style.dart';
+import 'package:takaconnect/firebase_repository/controller/otp_controller.dart';
 import 'package:takaconnect/screens/login_success/login_success_screen.dart';
 
 import '../../../components/default_button.dart';
@@ -15,103 +20,56 @@ class OtpForm extends StatefulWidget {
 }
 
 class _OtpFormState extends State<OtpForm> {
-  FocusNode? pin2FocusNode;
-  FocusNode? pin3FocusNode;
-  FocusNode? pin4FocusNode;
 
-  @override
-  void initState() {
-    super.initState();
-    pin2FocusNode = FocusNode();
-    pin3FocusNode = FocusNode();
-    pin4FocusNode = FocusNode();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    pin2FocusNode!.dispose();
-    pin3FocusNode!.dispose();
-    pin4FocusNode!.dispose();
-  }
-
-  void nextField(String value, FocusNode? focusNode) {
-    if (value.length == 1) {
-      focusNode!.requestFocus();
-    }
-  }
-
+  String otp = '';
   @override
   Widget build(BuildContext context) {
 
+    var otpController = Get.put(OTPController());
     return Form(
       child: Column(
         children: [
           SizedBox(height: SizeConfig.screenHeight * 0.15),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: getProportionateScreenWidth(60),
-                child: TextFormField(
-                  autofocus: true,
-                  obscureText: true,
-                  style: const TextStyle(fontSize: 24),
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.center,
-                  decoration: otpInputDecoration,
-                  onChanged: (value) {
-                    nextField(value, pin2FocusNode);
-                  },
-                ),
-              ),
-              SizedBox(
-                width: getProportionateScreenWidth(60),
-                child: TextFormField(
-                  focusNode: pin2FocusNode,
-                  obscureText: true,
-                  style: const TextStyle(fontSize: 24),
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.center,
-                  decoration: otpInputDecoration,
-                  onChanged: (value) => nextField(value, pin3FocusNode),
-                ),
-              ),
-              SizedBox(
-                width: getProportionateScreenWidth(60),
-                child: TextFormField(
-                  focusNode: pin3FocusNode,
-                  obscureText: true,
-                  style: TextStyle(fontSize: 24),
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.center,
-                  decoration: otpInputDecoration,
-                  onChanged: (value) => nextField(value, pin4FocusNode),
-                ),
-              ),
-              SizedBox(
-                width: getProportionateScreenWidth(60),
-                child: TextFormField(
-                  focusNode: pin4FocusNode,
-                  obscureText: true,
-                  style: TextStyle(fontSize: 24),
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.center,
-                  decoration: otpInputDecoration,
-                  onChanged: (value) {
-                    if (value.length == 1) {
-                      pin4FocusNode!.unfocus();
-                      // Then you need to check is the code is correct or not
-                    }
-                  },
-                ),
-              ),
-            ],
+          OTPTextField(
+            length: 6,
+            width: MediaQuery.of(context).size.width,
+            fieldWidth: getProportionateScreenWidth(45),
+            style: TextStyle(
+              fontSize: 17,
+            ),
+            textFieldAlignment: MainAxisAlignment.spaceAround,
+            fieldStyle: FieldStyle.box,
+            onChanged: (val) {},
+            onCompleted: (code) {
+              otp = code;
+              OTPController.instance.verifyOTP(otp);
+            },
           ),
           SizedBox(height: SizeConfig.screenHeight * 0.15),
           DefaultButton(
             text: "Continue",
-            press: () {Navigator.pushNamed(context, LoginSuccessScreen.routeName);},
+            press: () {
+              //if (otp !='') {
+                OTPController.instance.verifyOTP(otp);
+                //Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+              // }else{
+              //   final snackBar = SnackBar(
+              //     backgroundColor: Colors.green,
+              //     content: const Text('No OTP Code found.'),
+              //     action: SnackBarAction(
+              //       textColor: Colors.white,
+              //       label: 'Undo',
+              //       onPressed: () {
+              //         // Some code to undo the change.
+              //       },
+              //     ),
+              //   );
+              //
+              //   // Find the ScaffoldMessenger in the widget tree
+              //   // and use it to show a SnackBar.
+              //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              // }
+            },
           )
         ],
       ),

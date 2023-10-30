@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:takaconnect/main.dart';
-import 'package:takaconnect/screens/addproducts/addproducts.dart';
-import 'package:takaconnect/screens/product_sellers/sellers.dart';
-import 'package:takaconnect/utils/http_strings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/constants.dart';
 import '../../../utils/size_config.dart';
 import '../../sign_in/sign_in_screen.dart';
 import '../components/splash_content.dart';
 import '../../../components/default_button.dart';
-import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
   @override
@@ -92,13 +88,10 @@ class _BodyState extends State<Body> {
                     Spacer(flex: 3),
                     DefaultButton(
                       text: "Continue",
-                      press: () {
-                        //Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': 'Product List'},);
+                      press: () async {
+
                         Navigator.pushNamed(context, SignInScreen.routeName);
-                        //Navigator.pushNamed(context, AddProductScreen.routeName,arguments: {'barTitle': 'Add Products'},);
-                        //django_get();
-                        //django_post();
-                        //django_main();
+
                       },
                     ),
                     Spacer(),

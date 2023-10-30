@@ -372,6 +372,7 @@ class _FilterScreenState extends State<FilterScreen> {
                               'filterTitle': selectedValue1,
                               'filterType': selectedValue2,
                               'filterCounty': selectedValue3,
+                              'sortKey':'Paper Seller, Cardboard, All Sub-County',
                             },
                           );
 

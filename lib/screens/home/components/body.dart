@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:takaconnect/screens/home/components/section_title.dart';
-import 'package:takaconnect/screens/home/components/waste_player_map.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import '../../../utils/constants.dart';
 import '../../../utils/size_config.dart';
 import 'categories.dart';
-import 'discount_banner.dart';
 import 'home_header.dart';
-import 'popular_product.dart';
-import 'special_offers.dart';
-
 
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+  final String firstname;
+  final String accounttype;
+  final String lastname;
+  final String county;
+  final String subcounty;
+  final String contact;
+
+  const Body(
+      {Key? key,
+      required this.firstname,
+      required this.accounttype,
+      required this.lastname,
+      required this.county,
+      required this.subcounty,
+      required this.contact})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +28,24 @@ class Body extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: getProportionateScreenHeight(20)),
-            const HomeHeader(),
+            HomeHeader(
+              accounttype: accounttype,
+              firstname: firstname,
+              lastname: lastname,
+              contact: contact,
+              county: county,
+              subcounty: subcounty,
+            ),
             SizedBox(height: getProportionateScreenWidth(10)),
             //DiscountBanner(),
-            const Categories(),
+            Categories(
+              accounttype: accounttype,
+                firstname: firstname,
+                lastname: lastname,
+                contact: contact,
+                county: county,
+                subcounty: subcounty,
+            ),
             //SpecialOffers(),
             //SizedBox(height: getProportionateScreenWidth(30)),
             //const PopularProducts(),

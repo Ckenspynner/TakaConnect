@@ -12,8 +12,23 @@ import 'product_images.dart';
 
 class Body extends StatelessWidget {
   final Product product;
+  final String customerAccount;
+  final String firstname;
+  final String lastname;
+  final String county;
+  final String contact;
+  final String subcounty;
 
-  const Body({Key? key, required this.product}) : super(key: key);
+  const Body(
+      {Key? key,
+      required this.product,
+      required this.customerAccount,
+      required this.firstname,
+      required this.lastname,
+      required this.county,
+      required this.contact,
+      required this.subcounty})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +41,12 @@ class Body extends StatelessWidget {
             children: [
               ProductDescription(
                 product: product,
+                customerAccount: customerAccount,
+                firstname: firstname,
+                lastname: lastname,
+                contact: contact,
+                county: county,
+                subcounty: subcounty,
                 pressOnSeeMore: () {},
               ),
               TopRoundedContainer(

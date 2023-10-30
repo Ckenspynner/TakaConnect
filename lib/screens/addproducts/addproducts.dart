@@ -7,7 +7,22 @@ import 'package:takaconnect/utils/size_config.dart';
 class AddProductScreen extends StatelessWidget {
   static String routeName = "/addproducts";
 
-  const AddProductScreen({super.key});
+  // final String firstname;
+  // final String accounttype;
+  // final String lastname;
+  // final String county;
+  // final String subcounty;
+  // final String contact;
+
+  const AddProductScreen(
+      {super.key,
+      // required this.firstname,
+      // required this.accounttype,
+      // required this.lastname,
+      // required this.county,
+      // required this.subcounty,
+      // required this.contact
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +53,15 @@ class AddProductScreen extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, FilterScreen.routeName);
             },
-            child: arguments['barTitle'] != 'Add Products'?Container(
-              padding: const EdgeInsets.only(right: 25),
-              child: const Icon(
-                Icons.sort,
-                color: Colors.black,
-              ),
-            ):Container(),
+            child: arguments['barTitle'] != 'Add Products'
+                ? Container(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: const Icon(
+                      Icons.sort,
+                      color: Colors.black,
+                    ),
+                  )
+                : Container(),
           ),
         ],
         title: Container(
@@ -57,7 +74,14 @@ class AddProductScreen extends StatelessWidget {
         ),
       ),
       backgroundColor: const Color(0xFFF5F6F9),
-      body: const Body(),
+      body: Body(
+        firstname: arguments['firstname'],
+        lastname: arguments['lastname'],
+        contact: arguments['contact'],
+        county: arguments['county'],
+        subcounty: arguments['subcounty'],
+        accounttype: arguments['accounttype'],
+      ),
       // body: SingleChildScrollView(
       //   child: Column(
       //     crossAxisAlignment: CrossAxisAlignment.start,

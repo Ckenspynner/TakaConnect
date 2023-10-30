@@ -28,7 +28,7 @@ class PopularSeller extends StatelessWidget {
                     (index) {
                       //print('${demoProducts[index].title},${demoProducts[index].materialType},${demoProducts[index].subcounty}');
                   //if (demoProducts[index].isPopular) {
-                    return SellerCard(product: demoCategories[index]);
+                    return SellerCard(product: demoCategories[index], customerAccount: '', firstname: '', lastname: '', county: '', subcounty: '', contact: '',);
                   //}
 
                   //return const SizedBox.shrink(); // here by default width and height is 0

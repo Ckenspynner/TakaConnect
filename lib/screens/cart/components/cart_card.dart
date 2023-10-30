@@ -7,10 +7,10 @@ import '../../../utils/size_config.dart';
 class CartCard extends StatelessWidget {
   const CartCard({
     Key? key,
-    required this.cart,
+    required this.order,
   }) : super(key: key);
 
-  final Cart cart;
+  final Orders order;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CartCard extends StatelessWidget {
                 color: Color(0xFFF5F6F9),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.asset(cart.product.images[0]),
+              child: Image.network(order.image),
             ),
           ),
         ),
@@ -35,20 +35,42 @@ class CartCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              cart.product.title,
-              style: TextStyle(color: Colors.black, fontSize: 16),
+              '${order.quantity} ${order.productname} items',
+              style: const TextStyle(color: Colors.black, fontSize: 16),
               maxLines: 2,
             ),
-            SizedBox(height: 10),
-            Text.rich(
+            const SizedBox(height: 10),
+            // Text.rich(
+            //   TextSpan(
+            //     text: "${cart.product.price} Kshs",
+            //     style: TextStyle(
+            //         fontWeight: FontWeight.w600, color: kPrimaryColor),
+            //     children: [
+            //       TextSpan(
+            //           text: " x${cart.numOfItem}",
+            //           style: Theme.of(context).textTheme.bodyText1),
+            //     ],
+            //   ),
+            // ),
+            order.buyer != ''? Text.rich(
               TextSpan(
-                text: "${cart.product.price} Kshs",
-                style: TextStyle(
+                text: "Location: ${order.sellerlocation}",
+                style: const TextStyle(
                     fontWeight: FontWeight.w600, color: kPrimaryColor),
                 children: [
                   TextSpan(
-                      text: " x${cart.numOfItem}",
-                      style: Theme.of(context).textTheme.bodyText1),
+                      text: "\nBuyer: ${order.buyer}\nContact: ${order.buyercontact}",)
+                ],
+              ),
+            ):
+            Text.rich(
+              TextSpan(
+                text: "Location: ${order.sellerlocation}",
+                style: const TextStyle(
+                    fontWeight: FontWeight.w600, color: kPrimaryColor),
+                children: [
+                  TextSpan(
+                    text: "\nRecycler: ${order.recycler}\nContact: ${order.recyclercontact}",)
                 ],
               ),
             )

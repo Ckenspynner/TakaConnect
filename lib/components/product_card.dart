@@ -26,7 +26,7 @@ class ProductCard extends StatelessWidget {
         width: getProportionateScreenWidth(width),
         child: GestureDetector(
           //onTap: (){print(product.title);},
-          onTap: () => Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': '${product.title} Sellers','filterTitle': product.title,},),
+          onTap: () => Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': '${product.title} Sellers','filterTitle': product.title,'sortKey':'hometospecific'},),
 
           //     Navigator.pushNamed(
           //   context,

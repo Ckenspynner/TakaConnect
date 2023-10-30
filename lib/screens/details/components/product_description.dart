@@ -11,12 +11,18 @@ import '../../../utils/size_config.dart';
 
 class ProductDescription extends StatefulWidget {
   final Product product;
+  final String customerAccount;
+  final String firstname;
+  final String lastname;
+  final String county;
+  final String contact;
+  final String subcounty;
   final GestureTapCallback? pressOnSeeMore;
 
   const ProductDescription({
     Key? key,
     required this.product,
-    this.pressOnSeeMore,
+    this.pressOnSeeMore, required this.customerAccount, required this.firstname, required this.lastname, required this.county, required this.contact, required this.subcounty,
   }) : super(key: key);
 
   @override
@@ -43,20 +49,28 @@ class _ProductDescriptionState extends State<ProductDescription> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${widget.product.category} > ${widget.product.categorytype}',//\nColor: ${widget.product.itemcolor}
+                '${widget.product.category} > ${widget.product.categorytype}',
+                //\nColor: ${widget.product.itemcolor}
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                widget.product.quantity == 0 ?'out of stock':'${widget.product.quantity}\n in stock',
+                widget.product.quantity == 0
+                    ? 'out of stock'
+                    : '${widget.product.quantity}\n in stock',
                 style: TextStyle(
-                    fontWeight: FontWeight.w600, color: widget.product.quantity <= 5 ? Colors.redAccent : kPrimaryColor,),
+                  fontWeight: FontWeight.w600,
+                  color: widget.product.quantity <= 5
+                      ? Colors.redAccent
+                      : kPrimaryColor,
+                ),
                 textAlign: TextAlign.center,
-
               ),
             ],
           ),
         ),
-        SizedBox(height: getProportionateScreenWidth(10),),
+        SizedBox(
+          height: getProportionateScreenWidth(10),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -64,8 +78,13 @@ class _ProductDescriptionState extends State<ProductDescription> {
               padding: EdgeInsets.only(
                 left: getProportionateScreenWidth(20),
               ),
-              child: const Text('Product Description',style: TextStyle(
-                fontWeight: FontWeight.w600, color: kPrimaryColor,),),
+              child: const Text(
+                'Product Description',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: kPrimaryColor,
+                ),
+              ),
             ),
             Align(
               alignment: Alignment.centerRight,
@@ -94,15 +113,16 @@ class _ProductDescriptionState extends State<ProductDescription> {
         ),
         Padding(
           padding: EdgeInsets.only(
-            left: getProportionateScreenWidth(20),
-            top: getProportionateScreenWidth(20)
-          ),
+              left: getProportionateScreenWidth(20),
+              top: getProportionateScreenWidth(20)),
           child: Text(
             widget.product.description,
             //maxLines: 3,
           ),
         ),
-        SizedBox(height: getProportionateScreenWidth(10),),
+        SizedBox(
+          height: getProportionateScreenWidth(10),
+        ),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: getProportionateScreenWidth(20),
@@ -157,7 +177,23 @@ class _ProductDescriptionState extends State<ProductDescription> {
             ],
           ),
         ),
-        OrderDetails(sellerContact: widget.product.contact, categorytype: widget.product.categorytype, category: widget.product.category),
+        OrderDetails(
+          sellerid: widget.product.id,
+          sellerContact: widget.product.contact,
+          categorytype: widget.product.categorytype,
+          category: widget.product.category,
+          buyercontact: widget.contact,
+          buyerlocation: widget.subcounty,
+          quantity: widget.product.quantity,
+          sellername: widget.product.seller,
+          sellerlocation: widget.product.location,
+          orderstatus: 'Received',
+          imageurl: widget.product.image,
+          productname: widget.product.category,
+          buyername: '${widget.firstname} ${widget.lastname}',
+          customerAccount:widget.customerAccount,
+          buyercounty:widget.county,
+        ),
       ],
     );
   }

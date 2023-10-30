@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:takaconnect/components/default_button.dart';
+import 'package:takaconnect/screens/home/home_screen.dart';
 
 import '../../utils/size_config.dart';
 import 'components/body.dart';
@@ -15,6 +17,7 @@ class OtpScreen extends StatelessWidget {
         title: Text("OTP Verification"),
       ),
       body: Body(),
+
     );
   }
 }

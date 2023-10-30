@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:input_quantity/input_quantity.dart';
+import 'package:takaconnect/components/default_button.dart';
 import 'package:takaconnect/main.dart';
 import 'package:takaconnect/utils/http_strings.dart';
 import 'package:takaconnect/utils/size_config.dart';
@@ -10,8 +11,14 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
 class AddProductForm extends StatefulWidget {
+  final String firstname;
+  final String accounttype;
+  final String lastname;
+  final String county;
+  final String subcounty;
+  final String contact;
   const AddProductForm({
-    Key? key,
+    Key? key, required this.firstname, required this.accounttype, required this.lastname, required this.county, required this.subcounty, required this.contact,
   }) : super(key: key);
 
   @override
@@ -267,7 +274,7 @@ class _AddProductFormState extends State<AddProductForm> {
                       Navigator.pop(context);
                       getImage(ImageSource.camera);
                     },
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(Icons.camera),
                         Text('From Camera'),
@@ -323,8 +330,8 @@ class _AddProductFormState extends State<AddProductForm> {
         'seller': '$seller'.toTitleCase(),
         'contact': '$contact',
         'quantity': '$quantity',
-        'category': '$category'.toTitleCase(),
-        'categorytype': '$categorytype'.toTitleCase(),
+        'category': '$category',
+        'categorytype': '$categorytype',
         'color': '$color'.toTitleCase(),
         'location': '$location'.toTitleCase(),
         'description': '$description',
@@ -337,9 +344,38 @@ class _AddProductFormState extends State<AddProductForm> {
       http.StreamedResponse response = await request.send();
 
       if (response.statusCode == 200) {
-        print(await response.stream.bytesToString());
+        final snackBar = SnackBar(
+          backgroundColor: Colors.green,
+          content: const Text('Added Successfully'),
+          action: SnackBarAction(
+            textColor: Colors.white,
+            label: 'Undo',
+            onPressed: () {
+              // Some code to undo the change.
+            },
+          ),
+        );
+
+        // Find the ScaffoldMessenger in the widget tree
+        // and use it to show a SnackBar.
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        //Navigator.pop(context);
       } else {
-        print(response.reasonPhrase);
+        final snackBar = SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: const Text('Request Unsuccessfully'),
+          action: SnackBarAction(
+            textColor: Colors.white,
+            label: 'Undo',
+            onPressed: () {
+              // Some code to undo the change.
+            },
+          ),
+        );
+
+        // Find the ScaffoldMessenger in the widget tree
+        // and use it to show a SnackBar.
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     } catch (e) {
       print(e);
@@ -348,7 +384,7 @@ class _AddProductFormState extends State<AddProductForm> {
 
   @override
   Widget build(BuildContext context) {
-    print(image?.path);
+    print('${widget.firstname} ${widget.lastname}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -600,69 +636,21 @@ class _AddProductFormState extends State<AddProductForm> {
                   right: getProportionateScreenWidth(20),
                   //vertical: 10,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            // if (orderText == 'Order') {
-                            //   _show_order_panel = !_show_order_panel;
-                            //   chatText = 'Close';
-                            //   orderText = 'Submit';
-                            // } else {
-                            //   if (_dropdownFormKey.currentState!.validate()) {
-                            //     _show_order_panel = !_show_order_panel;
-                            //     chatText = 'Chat';
-                            //     orderText = 'Order';
-                            //   }
-                            // }
-                            county = 'Taita Taveta';
-                            uploadImage(
-                                '428086bf6b4d116807f29f130788e3401c2b8377',
-                                sellerName,
-                                productQuantity,
-                                sellerContact,
-                                selectedValue1,
-                                selectedValue2,
-                                selectedValue3,
-                                controllerdescription.text,
-                                county,
-                                sellerLocation);
-
-                            //print('$sellerName, $productQuantity, $sellerContact $selectedValue1, $selectedValue2, ${controllercolor.text}, ${controllerdescription.text}, $county, $sellerLocation');
-                          });
-                        },
-                        child: Container(
-                          color: const Color(0xFFC4DFB4),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenWidth(20),
-                            vertical: 15,
-                          ),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Add Product',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ), //color: kPrimaryColor),
-                              ),
-                              SizedBox(width: 5),
-                              Icon(
-                                Icons.shopping_basket,
-                                size: 12,
-                                color: Colors.white,
-                                //color: kPrimaryColor,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                child: DefaultButton(
+                  text: "Add Product",
+                  press: () {
+                    uploadImage(
+                        '428086bf6b4d116807f29f130788e3401c2b8377',
+                        '${widget.firstname} ${widget.lastname}',
+                        productQuantity,
+                        widget.contact,
+                        selectedValue1,
+                        selectedValue2,
+                        selectedValue3,
+                        controllerdescription.text,
+                        widget.county,
+                        widget.subcounty);
+                  },
                 ),
               ),
             ],

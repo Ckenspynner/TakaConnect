@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:takaconnect/screens/cart/cart_screen.dart';
-
-import '../../../utils/constants.dart';
 import '../../../utils/size_config.dart';
-import 'icon_btn_with_counter.dart';
 
-class SearchField extends StatelessWidget {
-  const SearchField({
-    Key? key,
-  }) : super(key: key);
+class SearchField extends StatefulWidget {
+  final String firstname;
+  final String accounttype;
+  const SearchField({Key? key, required this.firstname, required this.accounttype}) : super(key: key);
 
+  @override
+  State<SearchField> createState() => _SearchFieldState();
+}
+
+class _SearchFieldState extends State<SearchField> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,8 +57,8 @@ class SearchField extends StatelessWidget {
             height: SizeConfig.screenHeight * 0.1, //40%
           ),
           const SizedBox(width: 10),
-          const Text('Welcome,\nKenneth Otieno',maxLines: 2, textAlign: TextAlign.start)
-
+          Text('Hello,\n${widget.firstname}.',
+              maxLines: 2, textAlign: TextAlign.start)
         ],
       ),
     );

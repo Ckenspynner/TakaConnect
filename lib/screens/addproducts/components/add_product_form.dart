@@ -2,12 +2,16 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:takaconnect/screens/addproducts/components/form_section.dart';
-import '../../../utils/constants.dart';
-import '../../../utils/size_config.dart';
 
 class AddProductDetails extends StatefulWidget {
+  final String firstname;
+  final String accounttype;
+  final String lastname;
+  final String county;
+  final String subcounty;
+  final String contact;
   const AddProductDetails({
-    Key? key,
+    Key? key, required this.firstname, required this.accounttype, required this.lastname, required this.county, required this.subcounty, required this.contact,
   }) : super(key: key);
 
   @override
@@ -24,7 +28,7 @@ class _AddProductDetailsState extends State<AddProductDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Padding(
@@ -91,7 +95,12 @@ class _AddProductDetailsState extends State<AddProductDetails> {
         //     ],
         //   ),
         // ),
-        AddProductForm(),
+        AddProductForm(firstname: widget.firstname,
+          lastname: widget.lastname,
+          contact:widget.contact,
+          county: widget.county,
+          subcounty: widget.subcounty,
+          accounttype: widget.accounttype,),
       ],
     );
   }
