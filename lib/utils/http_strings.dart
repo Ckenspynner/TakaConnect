@@ -1,6 +1,8 @@
 
-//const String server_path = 'http://ec2-3-81-137-47.compute-1.amazonaws.com:8000';
-const String server_path = 'http://10.0.2.2:8000';
+const String auth_token = 'd3b8c858a6e9c24aaa672fbc72e10b784e16d705';
+const String server_path = 'http://ec2-3-81-137-47.compute-1.amazonaws.com:8000';
+
+//const String server_path = 'http://10.0.2.2:8000';
 //const String user_http_path = '$server_path/core/user';
 const String user_http_path = '$server_path/core/user';
 //const String user_http_path = '$server_path/core/user';

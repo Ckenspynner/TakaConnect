@@ -14,11 +14,14 @@ class HomeHeader extends StatelessWidget {
   final String contact;
   final String county;
   final String subcounty;
-  const HomeHeader({Key? key, required this.firstname, required this.accounttype, required this.lastname, required this.contact, required this.county, required this.subcounty}) : super(key: key);
+  final String gender;
+  final String id;
+  const HomeHeader({Key? key, required this.firstname, required this.accounttype, required this.lastname, required this.contact, required this.county, required this.subcounty, required this.gender, required this.id}) : super(key: key);
 
-  Future<void> prefrenceLogout() async {
+  Future<void> loggedAcountNumber() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('phoneNumber');
+    prefs.remove('loggedAccNumber');
+    prefs.remove('loggedAccCounty');
   }
 
   @override
@@ -39,6 +42,10 @@ class HomeHeader extends StatelessWidget {
                 'county': county,
                 'subcounty': subcounty,
                 'accounttype': accounttype,
+                'firstname': firstname,
+                'lastname': lastname,
+                'gender': gender,
+                'id': id,
               },),
           ),
           IconBtnWithCounter(
@@ -50,7 +57,7 @@ class HomeHeader extends StatelessWidget {
               //Navigator.pushNamedAndRemoveUntil(context, SignInScreen.routeName);
               Navigator.of(context)
                   .pushNamedAndRemoveUntil(SignInScreen.routeName, (Route<dynamic> route) => false);
-              prefrenceLogout();
+              loggedAcountNumber();
             },
           ),
         ],

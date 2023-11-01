@@ -60,7 +60,14 @@ class PopularProducts extends StatelessWidget {
                 demoCategories.length,
                 (index) {
                   if (demoCategories[index].isPopular) {
-                    return ProductCard(product: demoCategories[index]);
+                    return ProductCard(
+                      product: demoCategories[index],
+                      county: county,
+                      firstname: firstname,
+                      lastname: lastname,
+                      contact: contact,
+                      subcounty: subcounty,
+                    );
                   }
 
                   return const SizedBox

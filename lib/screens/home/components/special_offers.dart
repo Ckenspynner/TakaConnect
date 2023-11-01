@@ -151,10 +151,10 @@ class SpecialOfferCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(
-                            text: numOfBrands == null
-                                ? ''
-                                : "$numOfBrands Products"),
+                        // TextSpan(
+                        //     text: numOfBrands == null
+                        //         ? ''
+                        //         : "$numOfBrands Products"),
                       ],
                     ),
                   ),

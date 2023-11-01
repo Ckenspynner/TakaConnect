@@ -13,11 +13,15 @@ class SellerProductCard extends StatefulWidget {
     Key? key,
     this.width = 140,
     this.aspectRetio = 1.02,
-    required this.product,
+    required this.product, required this.firstname, required this.lastname, required this.county, required this.subcounty, required this.contact,
   }) : super(key: key);
 
   final double width, aspectRetio;
-  final Product product;
+  final Product product;final String firstname;
+  final String lastname;
+  final String county;
+  final String subcounty;
+  final String contact;
 
   @override
   State<SellerProductCard> createState() => _SellerProductCardState();
@@ -25,30 +29,30 @@ class SellerProductCard extends StatefulWidget {
 
 class _SellerProductCardState extends State<SellerProductCard> {
 
-  String sellercounty = 'Taita Taveta';
+  //String widget.county = 'Taita Taveta';
 
   deleteSellerProduct(token, id) async {
-    //,sellercounty
+    //,widget.county
     var path;
 
-    sellercounty = 'Taita Taveta';
+    //widget.county = 'Taita Taveta';
 
-    if (sellercounty == 'Mombasa') {//works
+    if (widget.county == 'Mombasa') {//works
       path = deleteupdatemombasaproductsellerUrl;
     }
-    if (sellercounty == 'Lamu') {//works
+    if (widget.county == 'Lamu') {//works
       path = deleteupdatelamuproductsellerUrl;
     }
-    if (sellercounty == 'Kwale') {//works
+    if (widget.county == 'Kwale') {//works
       path = deleteupdatekwaleproductsellerUrl;
     }
-    if (sellercounty == 'Kilifi') {//works
+    if (widget.county == 'Kilifi') {//works
       path = deleteupdatekilifiproductsellerUrl;
     }
-    if (sellercounty == 'Tana River') {//works
+    if (widget.county == 'Tana River') {//works
       path = deleteupdatetanariverproductsellerUrl;
     }
-    if (sellercounty == 'Taita Taveta') {//works
+    if (widget.county == 'Taita Taveta') {//works
       path = deleteupdatetaitatavetaproductsellerUrl;
     }
 
@@ -61,44 +65,51 @@ class _SellerProductCardState extends State<SellerProductCard> {
     });
     //print(response.body);
 
-    if (response.statusCode == 200) {
-      final snackBar = SnackBar(
-        backgroundColor: Colors.green,
-        content: const Text('Deleted Successfully'),
-        action: SnackBarAction(
-          textColor: Colors.white,
-          label: 'Undo',
-          onPressed: () {
-            // Some code to undo the change.
-          },
-        ),
-      );
-
-      // Find the ScaffoldMessenger in the widget tree
-      // and use it to show a SnackBar.
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }else{
-      final snackBar = SnackBar(
-        backgroundColor: Colors.redAccent,
-        content: const Text('Delete Unsuccessfully'),
-        action: SnackBarAction(
-          textColor: Colors.white,
-          label: 'Undo',
-          onPressed: () {
-            // Some code to undo the change.
-          },
-        ),
-      );
-
-      // Find the ScaffoldMessenger in the widget tree
-      // and use it to show a SnackBar.
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
+    // if (response.statusCode == 200) {
+    //   final snackBar = SnackBar(
+    //     backgroundColor: Colors.green,
+    //     content: const Text('Deleted Successfully'),
+    //     action: SnackBarAction(
+    //       textColor: Colors.white,
+    //       label: 'Undo',
+    //       onPressed: () {
+    //         // Some code to undo the change.
+    //       },
+    //     ),
+    //   );
+    //
+    //   // Find the ScaffoldMessenger in the widget tree
+    //   // and use it to show a SnackBar.
+    //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // }else{
+    //   final snackBar = SnackBar(
+    //     backgroundColor: Colors.redAccent,
+    //     content: const Text('Delete Unsuccessfully'),
+    //     action: SnackBarAction(
+    //       textColor: Colors.white,
+    //       label: 'Undo',
+    //       onPressed: () {
+    //         // Some code to undo the change.
+    //       },
+    //     ),
+    //   );
+    //
+    //   // Find the ScaffoldMessenger in the widget tree
+    //   // and use it to show a SnackBar.
+    //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
     //print(product.image);
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
+    // print(arguments['firstname']);
+    // print(arguments['lastname']);
+    // print(arguments['contact']);
+    // print(arguments['subcounty']);
+    // print(arguments['contact']);
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: GestureDetector(
@@ -210,16 +221,22 @@ class _SellerProductCardState extends State<SellerProductCard> {
                                                   onPressed: () {
                                                     //print(product.id);
                                                     deleteSellerProduct(
-                                                        '428086bf6b4d116807f29f130788e3401c2b8377',
+                                                        auth_token,
                                                         widget.product.id);
                                                     Navigator.pop(context);
-                                                    Navigator.pop(context);
-                                                    Navigator.pushNamed(
+                                                    //Navigator.pop(context);
+                                                    Navigator.pushReplacementNamed(
                                                       context,
                                                       SellerScreen.routeName,
                                                       arguments: {
                                                         'barTitle':
-                                                            'Your Products'
+                                                            'Your Products',
+                                                        'firstname': arguments['firstname'],
+                                                        'lastname': arguments['lastname'],
+                                                        'contact': arguments['contact'],
+                                                        'county': arguments['county'],
+                                                        'subcounty': arguments['subcounty'],
+                                                        'sortKey': 'hometosellerproductslist',
                                                       },
                                                     );
                                                   },

@@ -94,10 +94,14 @@ class CustomBottomNavBar extends StatelessWidget {
                 onPressed: () =>
                     Navigator.pushNamed(context, CartScreen.routeName,
                       arguments: {
+                        'id': id,
+                        'firstname': firstname,
+                        'lastname': lastname,
                         'contact': contact,
+                        'accounttype': accounttype,
                         'county': county,
                         'subcounty': subcounty,
-                        'accounttype': accounttype,
+                        'gender': gender
                       },),
               ),
               IconButton(

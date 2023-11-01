@@ -25,6 +25,8 @@ class HomeScreen extends StatelessWidget {
           county: arguments['county'],
           subcounty: arguments['subcounty'],
           accounttype: arguments['accounttype'],
+          id: arguments['id'],
+          gender: arguments['gender'],
         ),
         bottomNavigationBar: CustomBottomNavBar(
             selectedMenu: MenuState.home,

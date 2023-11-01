@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:takaconnect/screens/otp/otp_screen.dart';
 import 'package:takaconnect/utils/http_strings.dart';
 
@@ -61,13 +62,15 @@ class _SignFormState extends State<SignForm> {
           phoneNumber: otpPhoneNumber,
           verificationCompleted: (PhoneAuthCredential authCredential) async {
             await _auth.signInWithCredential(authCredential).then((value) {
+              loggedAcountNumber(selectedValue2);
+
               Navigator.pushNamed(context, LoginSuccessScreen.routeName,
                   arguments: {
-                    //'otpPhoneNumber': phoneNo.text,
                     'contact': otpPhoneNumber,
                     'county': selectedValue2,
                     'term': true,
                     'appBarTitle':'Login Successful',
+                    'welcomeTitle':'Login Success',
                   });
             });
           },
@@ -115,15 +118,15 @@ class _SignFormState extends State<SignForm> {
                                 .then((result) {
                               if (result != null) {
                                 Navigator.pop(context);
+                                loggedAcountNumber(selectedValue2);
 
-                                Navigator.pushNamed(
-                                    context, LoginSuccessScreen.routeName,
+                                Navigator.pushNamed(context, LoginSuccessScreen.routeName,
                                     arguments: {
-                                      //'otpPhoneNumber': phoneNo.text,
                                       'contact': otpPhoneNumber,
                                       'county': selectedValue2,
                                       'term': true,
                                       'appBarTitle':'Login Successful',
+                                      'welcomeTitle':'Login Success',
                                     });
                               }
                             }).catchError((e) {
@@ -157,6 +160,16 @@ class _SignFormState extends State<SignForm> {
       });
     }
   }
+
+  Future<void> loggedAcountNumber(county) async {
+
+    SharedPreferences pref =await SharedPreferences.getInstance();
+    pref.setString('loggedAccNumber', otpPhoneNumber!);
+    pref.setString('loggedAccCounty', county);
+
+  }
+
+
 
   verifycontact(contact,county) async {
 
@@ -193,37 +206,43 @@ class _SignFormState extends State<SignForm> {
     verify.forEach((element) {
       if(element["contact"].contains(contact)){
         //there is element
-        //_signInWithMobileNumber();
+        _signInWithMobileNumber();
         //userprint();
         // setState(() {
         //   otpRequest = true;
         // });
-        Navigator.pushNamed(context, LoginSuccessScreen.routeName,
-            arguments: {
-              'contact': otpPhoneNumber,
-              'county': selectedValue2,
-              'term': true,
-              'appBarTitle':'Login Successful',
-            });
+        //loggedAcountNumber(county);
 
-      }else{
-        final snackBar = SnackBar(
-          content: const Text(
-            'No record found\n\n1. Please provide valid credentials\n2. The number your provided does not have an account.',textAlign: TextAlign.center,style: TextStyle(fontSize: 16),),
-          behavior: SnackBarBehavior.floating,
-          dismissDirection: DismissDirection.up,
-          backgroundColor: Colors.redAccent, elevation: 1000,
-          margin: EdgeInsets.only(
-              bottom: MediaQuery.of(context).size.height - 155,
-              left: 10,
-              right: 10),
+        // Navigator.pushNamed(context, LoginSuccessScreen.routeName,
+        //     arguments: {
+        //       'contact': otpPhoneNumber,
+        //       'county': selectedValue2,
+        //       'term': true,
+        //       'appBarTitle':'Login Successful',
+        //       'welcomeTitle':'Login Success',
+        //     });
 
-        );
-
-        // Find the ScaffoldMessenger in the widget tree
-        // and use it to show a SnackBar.
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
+
+      // else{
+      //   final snackBar = SnackBar(
+      //     content: const Text(
+      //       'No record found\n\n1. Please provide valid credentials\n2. The number your provided does not have an account.',textAlign: TextAlign.center,style: TextStyle(fontSize: 16),),
+      //     behavior: SnackBarBehavior.floating,
+      //     dismissDirection: DismissDirection.up,
+      //     backgroundColor: Colors.redAccent, elevation: 1000,
+      //     margin: EdgeInsets.only(
+      //         bottom: MediaQuery.of(context).size.height - 155,
+      //         left: 10,
+      //         right: 10),
+      //
+      //   );
+      //
+      //   // Find the ScaffoldMessenger in the widget tree
+      //   // and use it to show a SnackBar.
+      //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      // }
+
     });
 
   }

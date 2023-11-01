@@ -13,20 +13,45 @@ class ProductCard extends StatelessWidget {
     this.width = 140,
     this.aspectRetio = 1.02,
     required this.product,
+    required this.county,
+    required this.lastname,
+    required this.firstname,
+    required this.subcounty,
+    required this.contact,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final Product product;
+  final String county;
+  final String lastname;
+  final String firstname;
+  final String subcounty;
+  final String contact;
 
   @override
   Widget build(BuildContext context) {
+    //print(county);
     return Padding(
       padding: EdgeInsets.only(left: getProportionateScreenWidth(20)),
       child: SizedBox(
         width: getProportionateScreenWidth(width),
         child: GestureDetector(
           //onTap: (){print(product.title);},
-          onTap: () => Navigator.pushNamed(context, SellerScreen.routeName,arguments: {'barTitle': '${product.title} Sellers','filterTitle': product.title,'sortKey':'hometospecific'},),
+          onTap: () => Navigator.pushNamed(
+            context,
+            SellerScreen.routeName,
+            arguments: {
+              'barTitle': '${product.title} Sellers',
+              'filterTitle': product.title,
+              'county': county,
+              'firstname': firstname,
+              'lastname': lastname,
+              'contact': contact,
+              'county': county,
+              'subcounty': subcounty,
+              'sortKey': 'hometospecific'
+            },
+          ),
 
           //     Navigator.pushNamed(
           //   context,

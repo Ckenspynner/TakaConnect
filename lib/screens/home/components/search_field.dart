@@ -57,7 +57,7 @@ class _SearchFieldState extends State<SearchField> {
             height: SizeConfig.screenHeight * 0.1, //40%
           ),
           const SizedBox(width: 10),
-          Text('Hello,\n${widget.firstname}.',
+          Text('Welcome Back,\n${widget.firstname}',
               maxLines: 2, textAlign: TextAlign.start)
         ],
       ),

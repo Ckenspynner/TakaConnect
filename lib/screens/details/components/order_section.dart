@@ -40,7 +40,8 @@ class OrderDetails extends StatefulWidget {
     required this.productname,
     required this.buyername,
     required this.sellerid,
-    required this.customerAccount, required this.buyercounty,
+    required this.customerAccount,
+    required this.buyercounty,
   }) : super(key: key);
 
   @override
@@ -57,34 +58,45 @@ class _OrderDetailsState extends State<OrderDetails> {
     return min + Random().nextInt(max - min);
   }
 
-
   placeOrder(token, id, image, productname, buyer, buyercontact, buyerlocation,
       quantity, seller, sellercontact, sellerlocation, orderstatus) async {
     var path;
 
     if (widget.buyercounty == 'Mombasa') {
       //works
-      path = widget.customerAccount == 'Buyer'?createmombasaBuyerUrl:createmombasaRecyclerUrl;
+      path = widget.customerAccount == 'Buyer'
+          ? createmombasaBuyerUrl
+          : createmombasaRecyclerUrl;
     }
     if (widget.buyercounty == 'Lamu') {
       //works
-      path = widget.customerAccount == 'Buyer'?createlamuBuyerUrl:createlamuRecyclerUrl;
+      path = widget.customerAccount == 'Buyer'
+          ? createlamuBuyerUrl
+          : createlamuRecyclerUrl;
     }
     if (widget.buyercounty == 'Kwale') {
       //works
-      path = widget.customerAccount == 'Buyer'?createkwaleBuyerUrl:createkwaleRecyclerUrl;
+      path = widget.customerAccount == 'Buyer'
+          ? createkwaleBuyerUrl
+          : createkwaleRecyclerUrl;
     }
     if (widget.buyercounty == 'Kilifi') {
       //works
-      path = widget.customerAccount == 'Buyer'?createkilifiBuyerUrl:createkilifiRecyclerUrl;
+      path = widget.customerAccount == 'Buyer'
+          ? createkilifiBuyerUrl
+          : createkilifiRecyclerUrl;
     }
     if (widget.buyercounty == 'Tana River') {
       //works
-      path = widget.customerAccount == 'Buyer'?createtanariverBuyerUrl:createtanariverRecyclerUrl;
+      path = widget.customerAccount == 'Buyer'
+          ? createtanariverBuyerUrl
+          : createtanariverRecyclerUrl;
     }
     if (widget.buyercounty == 'Taita Taveta') {
       //works
-      path = widget.customerAccount == 'Buyer'?createtaitatavetaBuyerUrl:createtaitatavetaRecyclerUrl;
+      path = widget.customerAccount == 'Buyer'
+          ? createtaitatavetaBuyerUrl
+          : createtaitatavetaRecyclerUrl;
     }
 
     // print(path);
@@ -97,17 +109,17 @@ class _OrderDetailsState extends State<OrderDetails> {
       'image': '$image',
       'id': '$id',
       'productname': '$productname',
-      widget.customerAccount == 'Buyer'?'buyer':'recycler': '$buyer',
-      widget.customerAccount == 'Buyer'?'buyercontact':'recyclercontact': '$buyercontact',
-      widget.customerAccount == 'Buyer'?'buyerlocation':'recyclerlocation': '$buyerlocation',
+      widget.customerAccount == 'Buyer' ? 'buyer' : 'recycler': '$buyer',
+      widget.customerAccount == 'Buyer' ? 'buyercontact' : 'recyclercontact':
+          '$buyercontact',
+      widget.customerAccount == 'Buyer' ? 'buyerlocation' : 'recyclerlocation':
+          '$buyerlocation',
       'quantity': '$quantity',
       'seller': '$seller',
       'sellercontact': '$sellercontact',
       'sellerlocation': '$sellerlocation',
       'orderstatus': '$orderstatus',
     };
-    
-    
 
     var response = await http.post(uri, body: data, headers: {
       'Authorization': ' Token $token',
@@ -118,16 +130,16 @@ class _OrderDetailsState extends State<OrderDetails> {
     // }
 
     if (response.statusCode == 200) {
-      final snackBar = SnackBar(
+      const snackBar = SnackBar(
         backgroundColor: Colors.green,
-        content: const Text('Ordered Successfully'),
-        action: SnackBarAction(
-          textColor: Colors.white,
-          label: 'Undo',
-          onPressed: () {
-            // Some code to undo the change.
-          },
-        ),
+        content: Text('Ordered Successfully'),
+        // action: SnackBarAction(
+        //   textColor: Colors.white,
+        //   label: 'Undo',
+        //   onPressed: () {
+        //     // Some code to undo the change.
+        //   },
+        // ),
       );
 
       // Find the ScaffoldMessenger in the widget tree
@@ -154,7 +166,12 @@ class _OrderDetailsState extends State<OrderDetails> {
 
   @override
   Widget build(BuildContext context) {
-    //print(widget.customerAccount);
+    //print(widget.quantity);
+    // if (widget.sellerContact == widget.buyercontact) {
+    //   orderText = 'Add Stock';
+    // } else {
+    //   orderText == 'Order';
+    // }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -210,11 +227,19 @@ class _OrderDetailsState extends State<OrderDetails> {
                         if (value!.isEmpty) {
                           return "Enter Quantity Counts";
                         } else {
-                          //   if (int.parse(controllerCounts.text) <= 0) {
-                          //     return "Total Counts can't be 0 or Less than 0";
-                          //   } else {
-                          //     return null;
-                          //   }
+                          if (int.parse(controllerQuantity.text) <= 0 ) {
+                            return "Total Counts can't be 0 or Less than 0";
+                          } else {
+                            if (widget.quantity == 0) {
+                              return "This product is out of stock";
+                            } else {
+                              if (int.parse(controllerQuantity.text)>widget.quantity) {
+                                return "Only ${widget.quantity} items available";
+                              } else {
+                                return null;
+                              }
+                            }
+                          }
                         }
                       },
                     ),
@@ -288,6 +313,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
+                      //if (orderText == 'Order' || orderText == 'Add Stock') {
                       if (orderText == 'Order') {
                         _show_order_panel = !_show_order_panel;
                         chatText = 'Close';
@@ -299,7 +325,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                           orderText = 'Order';
 
                           placeOrder(
-                              '428086bf6b4d116807f29f130788e3401c2b8377',
+                              auth_token,
                               widget.sellerid,
                               widget.imageurl,
                               widget.productname,
@@ -307,6 +333,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                               widget.buyercontact,
                               widget.buyerlocation,
                               controllerQuantity.text,
+                              //orderText == 'Add Stock'?'-${controllerQuantity.text}':controllerQuantity.text,
                               widget.sellername,
                               widget.sellerContact,
                               widget.sellerlocation,

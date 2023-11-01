@@ -640,7 +640,7 @@ class _AddProductFormState extends State<AddProductForm> {
                   text: "Add Product",
                   press: () {
                     uploadImage(
-                        '428086bf6b4d116807f29f130788e3401c2b8377',
+                        auth_token,
                         '${widget.firstname} ${widget.lastname}',
                         productQuantity,
                         widget.contact,

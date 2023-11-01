@@ -56,6 +56,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     'gender': arguments['gender'],
                     'term': false,
                     'appBarTitle':'Terms and Conditions',
+                    'welcomeTitle':'Get Started',
                   });
             });
           },
@@ -119,6 +120,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                                 'gender': arguments['gender'],
                                 'term': false,
                                 'appBarTitle':'Terms and Conditions',
+                                'welcomeTitle':'Get Started',
                               });
 
 
@@ -236,24 +238,25 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                           text: "continue",
                           press: () {
                             if (_formKey.currentState!.validate()) {
-                              //_signInWithMobileNumber();
+                              _signInWithMobileNumber();
                               //userprint();
                               // setState(() {
                               //   otpRequest = true;
                               // });
-                              Navigator.pushNamed(context, LoginSuccessScreen.routeName,
-                                  arguments: {
-                                    //'otpPhoneNumber': phoneNo.text,
-                                    'firstname': firstname.text,
-                                    'lastname': lastname.text,
-                                    'contact': phoneNo.text,
-                                    'accounttype': arguments['accounttype'],
-                                    'county': arguments['county'],
-                                    'subcounty': arguments['subcounty'],
-                                    'gender': arguments['gender'],
-                                    'term': false,
-                                    'appBarTitle':'Terms and Conditions',
-                                  });
+                              // Navigator.pushNamed(context, LoginSuccessScreen.routeName,
+                              //     arguments: {
+                              //       //'otpPhoneNumber': phoneNo.text,
+                              //       'firstname': firstname.text,
+                              //       'lastname': lastname.text,
+                              //       'contact': phoneNo.text,
+                              //       'accounttype': arguments['accounttype'],
+                              //       'county': arguments['county'],
+                              //       'subcounty': arguments['subcounty'],
+                              //       'gender': arguments['gender'],
+                              //       'term': false,
+                              //       'appBarTitle':'Terms and Conditions',
+                              //       'welcomeTitle':'Get Started',
+                              //     });
 
                               //Register and Authenticate Users
                               //SignupController.instance.phoneAuthentication(controller.phoneNo.text.trim());

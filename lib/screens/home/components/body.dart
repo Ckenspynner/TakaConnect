@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takaconnect/screens/home/components/waste_player_map.dart';
 import '../../../utils/size_config.dart';
 import 'categories.dart';
 import 'home_header.dart';
@@ -10,6 +11,8 @@ class Body extends StatelessWidget {
   final String county;
   final String subcounty;
   final String contact;
+  final String gender;
+  final String id;
 
   const Body(
       {Key? key,
@@ -18,7 +21,7 @@ class Body extends StatelessWidget {
       required this.lastname,
       required this.county,
       required this.subcounty,
-      required this.contact})
+      required this.contact, required this.gender, required this.id})
       : super(key: key);
 
   @override
@@ -35,8 +38,10 @@ class Body extends StatelessWidget {
               contact: contact,
               county: county,
               subcounty: subcounty,
+              id: id,
+              gender: gender,
             ),
-            SizedBox(height: getProportionateScreenWidth(10)),
+            //SizedBox(height: getProportionateScreenWidth(10)),
             //DiscountBanner(),
             Categories(
               accounttype: accounttype,
@@ -49,7 +54,7 @@ class Body extends StatelessWidget {
             //SpecialOffers(),
             //SizedBox(height: getProportionateScreenWidth(30)),
             //const PopularProducts(),
-            //const WastePlayerMap(),
+            const WastePlayerMap(),
           ],
         ),
       ),

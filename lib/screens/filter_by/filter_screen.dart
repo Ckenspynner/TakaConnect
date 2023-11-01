@@ -15,7 +15,7 @@ class FilterScreen extends StatefulWidget {
 class _FilterScreenState extends State<FilterScreen> {
   String selectedValue1 = "Select Category";
   String selectedValue2 = "Select Category Type";
-  String selectedValue3 = "Select Sub-County";
+  String selectedValue3 = "Select Your Sub-County";
 
   //Dropdown parameters definition
   List<DropdownMenuItem<String>> get dropdownItems1 {
@@ -182,7 +182,7 @@ class _FilterScreenState extends State<FilterScreen> {
   List<DropdownMenuItem<String>> get dropdownItems3 {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
-          value: "Select Sub-County", child: Text("Select Sub-County")),
+          value: "Select Your Sub-County", child: Text("Select Your Sub-County")),
       const DropdownMenuItem(
           value: "All Sub-County", child: Text("All Sub-County")),
       const DropdownMenuItem(value: "Changamwe", child: Text("Changamwe")),
@@ -198,7 +198,7 @@ class _FilterScreenState extends State<FilterScreen> {
   List<DropdownMenuItem<String>> get dropdownNull2 {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(
-          value: "Select Sub-County", child: Text("Select Sub-County")),
+          value: "Select Your Sub-County", child: Text("Select Your Sub-County")),
     ];
     return menuItems;
   }
@@ -207,6 +207,10 @@ class _FilterScreenState extends State<FilterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
+    // print(arguments['subcounty']);
+    // print(arguments['county']);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -267,7 +271,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     setState(() {
                       selectedValue1 = newValue!;
                       selectedValue2 = "Select Category Type";
-                      selectedValue3 = "Select Sub-County";
+                      selectedValue3 = "Select Your Sub-County";
                     });
                   },
                   items: dropdownItems1),
@@ -298,7 +302,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   onChanged: (String? newValue) {
                     setState(() {
                       selectedValue2 = newValue!;
-                      selectedValue3 = "Select Sub-County";
+                      selectedValue3 = "Select Your Sub-County";
                     });
                   },
                   items: selectedValue1 == 'Plastics'
@@ -337,7 +341,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     fillColor: Colors.transparent,
                   ),
                   validator: (value) =>
-                      value == "Select Sub-County" ? "Select Sub-County" : null,
+                      value == "Select Your Sub-County" ? "Select Your Sub-County" : null,
                   //dropdownColor: Colors.blueAccent,
                   value: selectedValue3,
                   icon: const Icon(Icons.keyboard_arrow_down),
@@ -346,9 +350,22 @@ class _FilterScreenState extends State<FilterScreen> {
                       selectedValue3 = newValue!;
                     });
                   },
-                  items: selectedValue2 == "Select Category Type"
-                      ? dropdownNull2
-                      : dropdownItems3),
+                  // items: selectedValue2 == "Select Category Type"
+                  //     ? dropdownNull2
+                  //     : dropdownItems3),
+            items: arguments['county'] == 'Kilifi'
+                ? dropdownKilifi
+                : arguments['county'] == 'Kwale'
+                ? dropdownKwale
+                : arguments['county'] == 'Mombasa'
+                ? dropdownMombasa
+                : arguments['county'] == 'Lamu'
+                ? dropdownLamu
+                : arguments['county'] == 'Tana River'
+                ? dropdownTanaRiver
+                : arguments['county'] == 'Taita Taveta'
+                ? dropdownTaitaTaveta
+                : dropdownNull2),
               const SizedBox(
                 height: 30,
               ),
@@ -372,6 +389,11 @@ class _FilterScreenState extends State<FilterScreen> {
                               'filterTitle': selectedValue1,
                               'filterType': selectedValue2,
                               'filterCounty': selectedValue3,
+                              'firstname': arguments['firstname'],
+                              'lastname': arguments['lastname'],
+                              'contact': arguments['contact'],
+                              'county': arguments['county'],
+                              'subcounty': arguments['subcounty'],
                               'sortKey':'Paper Seller, Cardboard, All Sub-County',
                             },
                           );
@@ -387,5 +409,110 @@ class _FilterScreenState extends State<FilterScreen> {
         ),
       ),
     );
+  }
+
+
+
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownKilifi {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(
+          value: "All Sub-County", child: Text("All Sub-County")),
+      const DropdownMenuItem(
+          value: "Kilifi North", child: Text("Kilifi North")),
+      const DropdownMenuItem(
+          value: "Kilifi South", child: Text("Kilifi South")),
+      const DropdownMenuItem(value: "Magarini", child: Text("Magarini")),
+      const DropdownMenuItem(value: "Kaloleni", child: Text("Kaloleni")),
+      const DropdownMenuItem(value: "Malindi", child: Text("Malindi")),
+      const DropdownMenuItem(value: "Ganze", child: Text("Ganze")),
+      const DropdownMenuItem(value: "Rabai", child: Text("Rabai")),
+    ];
+    return menuItems;
+  }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownKwale {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(
+          value: "All Sub-County", child: Text("All Sub-County")),
+      const DropdownMenuItem(
+          value: "All Sub-County", child: Text("All Sub-County")),
+      const DropdownMenuItem(value: "Lunga Lunga", child: Text("Lunga Lunga")),
+      const DropdownMenuItem(value: "Msambweni", child: Text("Msambweni")),
+      const DropdownMenuItem(value: "Kinango", child: Text("Kinango")),
+      const DropdownMenuItem(value: "Matunga", child: Text("Matunga")),
+    ];
+    return menuItems;
+  }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownTanaRiver {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(
+          value: "All Sub-County", child: Text("All Sub-County")),
+      const DropdownMenuItem(value: "Garsen", child: Text("Garsen")),
+      const DropdownMenuItem(value: "Galole", child: Text("Galole")),
+      const DropdownMenuItem(value: "Bura", child: Text("Bura")),
+    ];
+    return menuItems;
+  }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownTaitaTaveta {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(
+          value: "All Sub-County", child: Text("All Sub-County")),
+      const DropdownMenuItem(value: "Wundanyi", child: Text("Wundanyi")),
+      const DropdownMenuItem(value: "Mwatate", child: Text("Mwatate")),
+      const DropdownMenuItem(value: "Taveta", child: Text("Taveta")),
+      const DropdownMenuItem(value: "Voi", child: Text("Voi")),
+    ];
+    return menuItems;
+  }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownMombasa {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(
+          value: "All Sub-County", child: Text("All Sub-County")),
+      const DropdownMenuItem(value: "Changamwe", child: Text("Changamwe")),
+      const DropdownMenuItem(value: "Kisauni", child: Text("Kisauni")),
+      const DropdownMenuItem(value: "Likoni", child: Text("Likoni")),
+      const DropdownMenuItem(value: "Jomvu", child: Text("Jomvu")),
+      const DropdownMenuItem(value: "Mvita", child: Text("Mvita")),
+      const DropdownMenuItem(value: "Nyali", child: Text("Nyali")),
+    ];
+    return menuItems;
+  }
+
+  //Dropdown parameters definition
+  List<DropdownMenuItem<String>> get dropdownLamu {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "Select Your Sub-County",
+          child: Text("Select Your Sub-County")),
+      const DropdownMenuItem(
+          value: "All Sub-County", child: Text("All Sub-County")),
+      const DropdownMenuItem(value: "Lamu East", child: Text("Lamu East")),
+      const DropdownMenuItem(value: "Lamu West", child: Text("Lamu West")),
+    ];
+    return menuItems;
   }
 }

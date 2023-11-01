@@ -8,18 +8,27 @@ import '../../../utils/size_config.dart';
 import 'cart_card.dart';
 
 class Body extends StatefulWidget {
+  final String id;
+  final String firstname;
+  final String lastname;
   final String contact;
+  final String accounttype;
   final String county;
   final String subcounty;
-  //final String accounttype;
+  final String gender;
 
-  const Body(
-      {super.key,
-      required this.contact,
-      required this.county,
-      required this.subcounty,
-      //required this.accounttype
-      });
+  const Body({
+    super.key,
+    required this.contact,
+    required this.county,
+    required this.subcounty,
+    required this.id,
+    required this.firstname,
+    required this.lastname,
+    required this.accounttype,
+    required this.gender,
+    //required this.accounttype
+  });
 
   @override
   _BodyState createState() => _BodyState();
@@ -37,62 +46,79 @@ class _BodyState extends State<Body> {
         <String, dynamic>{}) as Map;
     //print(arguments['accounttypecart']);
 
-    arguments['accounttypecart']==null?buyerorders = 'Buyer':buyerorders = arguments['accounttypecart'];
+    arguments['accounttypecart'] == null
+        ? buyerorders = 'Buyer'
+        : buyerorders = arguments['accounttypecart'];
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Column(
-            children: [
-              Text(
-                //"Your Cart",
-                "Your Orders",
-                style: TextStyle(color: Colors.black),
-              ),
-              // Text(
-              //   "${demoCarts.length} items",
-              //   style: Theme.of(context).textTheme.caption,
-              // ),
-            ],
-          ),
-          actions: [
-            Padding(
-              padding:
-              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // SearchField(firstname: firstname,
-                  // accounttype: accounttype,),
-                  IconBtnWithCounter(
-                    svgSrc: "assets/icons/buyer.svg",
-                    press: () =>
-                        Navigator.pushReplacementNamed(context, CartScreen.routeName,
+      appBar: AppBar(
+        title: const Column(
+          children: [
+            Text(
+              //"Your Cart",
+              "Your Orders",
+              style: TextStyle(color: Colors.black),
+            ),
+            // Text(
+            //   "${demoCarts.length} items",
+            //   style: Theme.of(context).textTheme.caption,
+            // ),
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // SearchField(firstname: firstname,
+                // accounttype: accounttype,),
+                IconBtnWithCounter(
+                  svgSrc: "assets/icons/buyer.svg",
+                  press: () => Navigator.pushReplacementNamed(
+                    context,
+                    CartScreen.routeName,
+                    arguments: {
+                      'contact': widget.contact,
+                      'county': widget.county,
+                      'subcounty': widget.subcounty,
+                      'accounttype': widget.accounttype,
+                      'firstname': widget.firstname,
+                      'lastname': widget.lastname,
+                      'gender': widget.gender,
+                      'id': widget.id,
+                      'accounttypecart': 'Buyer',
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: getProportionateScreenWidth(10),
+                ),
+                IconBtnWithCounter(
+                    //svgSrc: "assets/icons/Bell.svg",
+                    svgSrc: "assets/icons/recycle.svg",
+                    //numOfitem: 3,
+                    press: () => Navigator.pushReplacementNamed(
+                          context,
+                          CartScreen.routeName,
                           arguments: {
                             'contact': widget.contact,
                             'county': widget.county,
                             'subcounty': widget.subcounty,
-                            'accounttypecart': 'Buyer',
-                          },),
-                  ),
-                  SizedBox(width: getProportionateScreenWidth(10),),
-                  IconBtnWithCounter(
-                    //svgSrc: "assets/icons/Bell.svg",
-                    svgSrc: "assets/icons/recycle.svg",
-                    //numOfitem: 3,
-                      press: () =>
-                          Navigator.pushReplacementNamed(context, CartScreen.routeName,
-                            arguments: {
-                              'contact': widget.contact,
-                              'county': widget.county,
-                              'subcounty': widget.subcounty,
-                              'accounttypecart': 'Recycler',
-                            },)
-                  ),
-                ],
-              ),
+                            'accounttype': widget.accounttype,
+                            'firstname': widget.firstname,
+                            'lastname': widget.lastname,
+                            'gender': widget.gender,
+                            'id': widget.id,
+                            'accounttypecart': 'Recycler',
+                          },
+                        )),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
       body: FutureBuilder<ListOfProductOrders>(
         future: productOrderService.getMombasaProductOrders(
             widget.county, widget.subcounty, buyerorders),
@@ -129,7 +155,7 @@ class _BodyState extends State<Body> {
                     horizontal: getProportionateScreenWidth(20)),
                 child: ListView.builder(
                     itemCount: productOrders?.length,
-                    itemBuilder: (context, index) => Padding(
+                    itemBuilder: (context, index) => productOrders![index].sellercontact == widget.contact ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Dismissible(
                             key: Key(productOrders![index].id.toString()),
@@ -140,7 +166,8 @@ class _BodyState extends State<Body> {
                               });
                             },
                             background: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
                               decoration: BoxDecoration(
                                 //color: const Color(0xFFFFE6E6),
                                 color: kPrimaryLightColor,
@@ -155,14 +182,13 @@ class _BodyState extends State<Body> {
                             ),
                             child: CartCard(order: productOrders[index]),
                           ),
-                        )),
+                        ):const SizedBox
+                        .shrink(),
+                ),
               );
-            }else {
+            } else {
               return SizedBox(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
+                  width: MediaQuery.of(context).size.width,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

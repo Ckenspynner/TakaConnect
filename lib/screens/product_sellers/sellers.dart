@@ -38,7 +38,7 @@ class _SellerScreenState extends State<SellerScreen> {
     // print(arguments['contact']);
     // print(arguments['subcounty']);
     // print(arguments['contact']);
-    // print(arguments['county']);
+    print(arguments['county']);
     //print(arguments['barTitle']);
     return Scaffold(
       appBar: AppBar(
@@ -61,7 +61,17 @@ class _SellerScreenState extends State<SellerScreen> {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, FilterScreen.routeName);
+              Navigator.pushNamed(
+                context,
+                FilterScreen.routeName,
+                arguments: {
+                  'firstname': arguments['firstname'],
+                  'lastname': arguments['lastname'],
+                  'contact': arguments['contact'],
+                  'county': arguments['county'],
+                  'subcounty': arguments['subcounty'],
+                },
+              );
             },
             child: arguments['barTitle'] != 'Your Products'
                 ? Container(
@@ -298,6 +308,18 @@ class _SellerScreenState extends State<SellerScreen> {
                                     return arguments['contact'] ==
                                             productSellers[index].contact
                                         ? SellerProductCard(
+                                                                firstname:
+                                                                    arguments[
+                                                                        'firstname'],
+                                                                lastname: arguments[
+                                                                    'lastname'],
+                                                                contact: arguments[
+                                                                    'contact'],
+                                                                county: arguments[
+                                                                    'county'],
+                                                                subcounty:
+                                                                    arguments[
+                                                                        'subcounty'],
                                             product: productSellers[index])
                                         : const SizedBox.shrink();
                                   }
@@ -616,6 +638,18 @@ class _SellerScreenState extends State<SellerScreen> {
                                                     productSellers[index]
                                                         .contact
                                                 ? SellerProductCard(
+                                                                firstname:
+                                                                    arguments[
+                                                                        'firstname'],
+                                                                lastname: arguments[
+                                                                    'lastname'],
+                                                                contact: arguments[
+                                                                    'contact'],
+                                                                county: arguments[
+                                                                    'county'],
+                                                                subcounty:
+                                                                    arguments[
+                                                                        'subcounty'],
                                                     product:
                                                         productSellers[index])
                                                 : const SizedBox.shrink();
@@ -961,6 +995,18 @@ class _SellerScreenState extends State<SellerScreen> {
                                                         productSellers[index]
                                                             .contact
                                                     ? SellerProductCard(
+                                                                firstname:
+                                                                    arguments[
+                                                                        'firstname'],
+                                                                lastname: arguments[
+                                                                    'lastname'],
+                                                                contact: arguments[
+                                                                    'contact'],
+                                                                county: arguments[
+                                                                    'county'],
+                                                                subcounty:
+                                                                    arguments[
+                                                                        'subcounty'],
                                                         product:
                                                             productSellers![
                                                                 index])
@@ -1342,6 +1388,18 @@ class _SellerScreenState extends State<SellerScreen> {
                                                                     index]
                                                                 .contact
                                                         ? SellerProductCard(
+                                                                firstname:
+                                                                    arguments[
+                                                                        'firstname'],
+                                                                lastname: arguments[
+                                                                    'lastname'],
+                                                                contact: arguments[
+                                                                    'contact'],
+                                                                county: arguments[
+                                                                    'county'],
+                                                                subcounty:
+                                                                    arguments[
+                                                                        'subcounty'],
                                                             product:
                                                                 productSellers![
                                                                     index])
@@ -1471,6 +1529,7 @@ class _SellerScreenState extends State<SellerScreen> {
                                               ));
                                         }
                                         if (snapshot.hasData) {
+                                          //print(productSellers);
                                           if (productSellers!.isNotEmpty) {
                                             return Wrap(
                                                 direction: Axis.vertical,
@@ -1479,8 +1538,9 @@ class _SellerScreenState extends State<SellerScreen> {
                                                   ...List.generate(
                                                     productSellers!.length,
                                                     (index) {
-                                                      //print('${arguments['barTitle']} ,${arguments['filterType']} ,${arguments['filterCounty']}');
-                                                      //print('${arguments['barTitle']},${arguments['filterType']},${arguments['filterCounty']},${arguments['filterCounty']},${demoCategories[_iterateSellers].subcounty},$_iterateSellers');
+                                                      // print(
+                                                      //     '${arguments['barTitle']} ,${arguments['filterType']} ,${arguments['filterCounty']}');
+                                                      // print('${arguments['barTitle']},${arguments['filterType']},${arguments['filterCounty']},${arguments['filterCounty']},${demoCategories[_iterateSellers].subcounty},$_iterateSellers');
 
                                                       //CASE : Paper Sellers ,All Categories Types ,All Sub-County
                                                       if (arguments[
@@ -1757,6 +1817,18 @@ class _SellerScreenState extends State<SellerScreen> {
                                                                         index]
                                                                     .contact
                                                             ? SellerProductCard(
+                                                                firstname:
+                                                                    arguments[
+                                                                        'firstname'],
+                                                                lastname: arguments[
+                                                                    'lastname'],
+                                                                contact: arguments[
+                                                                    'contact'],
+                                                                county: arguments[
+                                                                    'county'],
+                                                                subcounty:
+                                                                    arguments[
+                                                                        'subcounty'],
                                                                 product:
                                                                     productSellers![
                                                                         index])
@@ -2180,9 +2252,22 @@ class _SellerScreenState extends State<SellerScreen> {
                                                                         index]
                                                                     .contact
                                                             ? SellerProductCard(
+                                                                firstname:
+                                                                    arguments[
+                                                                        'firstname'],
+                                                                lastname: arguments[
+                                                                    'lastname'],
+                                                                contact: arguments[
+                                                                    'contact'],
+                                                                county: arguments[
+                                                                    'county'],
+                                                                subcounty:
+                                                                    arguments[
+                                                                        'subcounty'],
                                                                 product:
                                                                     productSellers![
-                                                                        index])
+                                                                        index]
+                                                              )
                                                             : const SizedBox
                                                                 .shrink();
                                                       }
@@ -2496,8 +2581,20 @@ class _SellerScreenState extends State<SellerScreen> {
 // // //     if (arguments['barTitle'] == 'Your Products' &&
 // // //         arguments['filterType'] != 'All Categories Types' &&
 // // //         arguments['filterCounty'] != 'All Sub-County') {
-// // //       return SellerProductCard(product: productSellers[index], customerAccount: arguments['customerAccount'],);
-// // //     }
+// // //       return SellerProductCard(
+//                                                                 firstname:
+//                                                                     arguments[
+//                                                                         'firstname'],
+//                                                                 lastname: arguments[
+//                                                                     'lastname'],
+//                                                                 contact: arguments[
+//                                                                     'contact'],
+//                                                                 county: arguments[
+//                                                                     'county'],
+//                                                                 subcounty:
+//                                                                     arguments[
+//                                                                         'subcounty'],product: productSellers[index], customerAccount: arguments['customerAccount'],);
+// // // //     }
 // // //
 // // //     //CASE : Rubber Sellers ,Tyre ,Kisauni
 // // //     if (arguments['barTitle'] != 'Product List' &&
