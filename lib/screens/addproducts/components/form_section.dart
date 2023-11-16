@@ -235,7 +235,7 @@ class _AddProductFormState extends State<AddProductForm> {
 
   //we can upload image from camera or from gallery based on parameter
   Future getImage(ImageSource media) async {
-    var img = await picker.pickImage(source: media);
+    var img = await picker.pickImage(source: media,maxWidth: 300.0, maxHeight: 300.0);
 
     setState(() {
       image = img;

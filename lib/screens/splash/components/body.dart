@@ -24,7 +24,7 @@ class _BodyState extends State<Body> {
     },
     {
       "text":
-          "We help sellers, buyers and recyclers connect\naround Counties.",
+          "We help sellers, buyers and recyclers connect\nacross Counties.",
       "image": "assets/images/Interactive Map.png",
       "details": "Our Interactive Map"
 

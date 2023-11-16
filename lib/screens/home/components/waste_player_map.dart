@@ -24,22 +24,22 @@ class _WastePlayerMapState extends State<WastePlayerMap> {
   //   controller = WebViewController()
   //     ..setJavaScriptMode(JavaScriptMode.unrestricted)
   //     ..setBackgroundColor(const Color(0x00000000))
-  //   // ..setNavigationDelegate(
-  //   //   NavigationDelegate(
-  //   //     onProgress: (int progress) {
-  //   //       // Update loading bar.
-  //   //     },
-  //   //     onPageStarted: (String url) {},
-  //   //     onPageFinished: (String url) {},
-  //   //     onWebResourceError: (WebResourceError error) {},
-  //   //     onNavigationRequest: (NavigationRequest request) {
-  //   //       if (request.url.startsWith('https://www.youtube.com/')) {
-  //   //         return NavigationDecision.prevent;
-  //   //       }
-  //   //       return NavigationDecision.navigate;
-  //   //     },
-  //   //   ),
-  //   // )
+    // ..setNavigationDelegate(
+    //   NavigationDelegate(
+    //     onProgress: (int progress) {
+    //       // Update loading bar.
+    //     },
+    //     onPageStarted: (String url) {},
+    //     onPageFinished: (String url) {},
+    //     onWebResourceError: (WebResourceError error) {},
+    //     onNavigationRequest: (NavigationRequest request) {
+    //       if (request.url.startsWith('https://www.youtube.com/')) {
+    //         return NavigationDecision.prevent;
+    //       }
+    //       return NavigationDecision.navigate;
+    //     },
+    //   ),
+    // )
   //     ..loadRequest(Uri.parse('https://ckenspynner.github.io/Waste-Resource-Player/'));
   // }
   @override
@@ -99,30 +99,33 @@ class _InteractiveMapState extends State<InteractiveMap> {
       },
       child: SafeArea(
         child: Scaffold(
-          body: Stack(
-            children: [
-              InAppWebView(
-                initialUrlRequest: URLRequest(
-                    url: Uri.parse("https://ckenspynner.github.io/Waste-Resource-Player/")
+          body: Container(
+            color: const Color(0xFFB4B4B4),
+            child: Stack(
+              children: [
+                InAppWebView(
+                  initialUrlRequest: URLRequest(
+                      url: Uri.parse("https://ckenspynner.github.io/Waste-Resource-Player/")
+                  ),
+                  onWebViewCreated: (InAppWebViewController controller){
+                    inAppWebViewController = controller;
+                  },
+                  onProgressChanged: (InAppWebViewController controller , int progress){
+                    setState(() {
+                      _progress = progress / 100;
+                    });
+                  },
                 ),
-                onWebViewCreated: (InAppWebViewController controller){
-                  inAppWebViewController = controller;
-                },
-                onProgressChanged: (InAppWebViewController controller , int progress){
-                  setState(() {
-                    _progress = progress / 100;
-                  });
-                },
-              ),
-              _progress < 1 ? Container(
-                child: LinearProgressIndicator(
-                  color: kPrimaryColor,
-                  backgroundColor:
-                  const Color(0xFFB4B4B4),
-                  value: _progress,
-                ),
-              ):SizedBox()
-            ],
+                _progress < 1 ? Container(
+                  child: LinearProgressIndicator(
+                    color: kPrimaryColor,
+                    backgroundColor:
+                    const Color(0xFFB4B4B4),
+                    value: _progress,
+                  ),
+                ):const SizedBox()
+              ],
+            ),
           ),
         ),
       ),

@@ -162,7 +162,7 @@ class _LoginSuccessScreenState extends State<LoginSuccessScreen> {
                   SizedBox(height: SizeConfig.screenHeight * 0.04),
                   Image.asset(
                     //"assets/images/successpic.png",
-                    "assets/images/success.png",
+                    "assets/images/SuccessLoggedIn.png",
                     height: SizeConfig.screenHeight * 0.4, //40%
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.08),
@@ -172,7 +172,7 @@ class _LoginSuccessScreenState extends State<LoginSuccessScreen> {
                     style: TextStyle(
                       fontSize: getProportionateScreenWidth(30),
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Colors.blueAccent,
                     ),
                   ),
                   Visibility(
@@ -275,7 +275,7 @@ class _LoginSuccessScreenState extends State<LoginSuccessScreen> {
                                                   getProportionateScreenWidth(
                                                       30),
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.orange,
+                                              color: Colors.blue,
                                             ),
                                           ),
                                           SizedBox(
